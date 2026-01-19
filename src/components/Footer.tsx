@@ -41,8 +41,8 @@ const Footer = () => {
 
           <div className="flex items-center gap-1 text-sm text-muted-foreground">
             <span>Built with</span>
-            <Heart className="w-4 h-4 text-primary fill-primary" />
-            <span>using React</span>
+            <Heart className="w-4 h-4 text-red-500 fill-red-500" />
+            <span>by Dev</span>
           </div>
         </div>
       </div>

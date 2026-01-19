@@ -52,7 +52,7 @@ const Hero = () => {
             Full Stack Developer
             <span className="mono text-primary">{' />'}</span>
             <br />
-            <span className="text-lg">React • Node.js • TypeScript • PostgreSQL</span>
+            <span className="text-lg">NextJs • React • Node.js • TypeScript • PostgreSQL</span>
           </motion.p>
 
           {/* Social Links */}
@@ -96,26 +96,7 @@ const Hero = () => {
             </a>
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <a
-              href="#projects"
-              className="px-8 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all duration-300 glow-effect"
-            >
-              View Projects
-            </a>
-            <a
-              href="#experience"
-              className="px-8 py-3 rounded-xl glass hover:bg-secondary transition-all duration-300"
-            >
-              Experience
-            </a>
-          </motion.div>
+          
         </motion.div>
 
         {/* Scroll indicator */}
@@ -123,7 +104,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute left-1/2 -translate-x-1/2"
         >
           <a href="#experience" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
             <span className="text-xs mono">scroll</span>
