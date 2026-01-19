@@ -96,26 +96,6 @@ const Hero = () => {
             </a>
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <a
-              href="#projects"
-              className="px-8 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all duration-300 glow-effect"
-            >
-              View Projects
-            </a>
-            <a
-              href="#experience"
-              className="px-8 py-3 rounded-xl glass hover:bg-secondary transition-all duration-300"
-            >
-              Experience
-            </a>
-          </motion.div>
         </motion.div>
 
         {/* Scroll indicator */}
