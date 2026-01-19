@@ -13,6 +13,7 @@ const projects = [
       "50% efficiency improvement",
     ],
     featured: true,
+    websiteUrl: "https://plus.portal.growth99.com/service/Landingpages",
   },
   {
     title: "CollegeMate.in",
@@ -23,6 +24,7 @@ const projects = [
       "Google Meet & Calendar automation",
       "Race condition prevention",
     ],
+    websiteUrl: "https://collegemate.in",
   },
   {
     title: "CMS for AI/ML Class",
@@ -32,7 +34,7 @@ const projects = [
       "@iilm.edu account verification",
       "Secure file uploads with Cloudinary",
     ],
-    link: "https://github.com",
+    githubUrl: "https://github.com",
   },
   {
     title: "Job Board Platform (OSS)",
@@ -42,7 +44,7 @@ const projects = [
       "5,000+ lines contributed",
       "User profile features",
     ],
-    link: "https://github.com",
+    githubUrl: "https://github.com",
     isOSS: true,
   },
 ];
@@ -94,20 +96,30 @@ const Projects = () => {
                     )}
                   </div>
                 </div>
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg hover:bg-secondary transition-colors"
-                  >
-                    {project.isOSS ? (
-                      <Github className="w-5 h-5 text-muted-foreground" />
-                    ) : (
-                      <ExternalLink className="w-5 h-5 text-muted-foreground" />
-                    )}
-                  </a>
-                )}
+                <div className="flex items-center gap-2">
+                  {project.websiteUrl && (
+                    <a
+                      href={project.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg hover:bg-secondary transition-colors"
+                      aria-label="Visit website"
+                    >
+                      <ExternalLink className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg hover:bg-secondary transition-colors"
+                      aria-label="View on GitHub"
+                    >
+                      <Github className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
+                    </a>
+                  )}
+                </div>
               </div>
 
               <p className="text-muted-foreground mb-4">{project.description}</p>
