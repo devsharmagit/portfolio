@@ -41,10 +41,7 @@ const Experience = () => {
           <h2 className="section-heading">Experience</h2>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-px" />
-
+        <div className="grid md:grid-cols-2 gap-6">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -52,44 +49,34 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`relative grid md:grid-cols-2 gap-8 mb-12 ${
-                index % 2 === 0 ? "" : "md:direction-rtl"
-              }`}
+              className="glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-300"
             >
-              {/* Timeline dot */}
-              <div className="absolute left-0 md:left-1/2 top-0 w-3 h-3 rounded-full bg-primary -translate-x-1 md:-translate-x-1.5 glow-effect" />
-
-              {/* Content */}
-              <div className={`pl-8 md:pl-0 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:col-start-2 md:pl-16"}`}>
-                <div className="glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-300">
-                  <div className={`flex items-center gap-2 mb-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                    <Briefcase className="w-4 h-4 text-primary" />
-                    <h3 className="text-xl font-semibold">{exp.title}</h3>
-                  </div>
-                  
-                  <p className="text-primary font-medium mb-2">{exp.company}</p>
-                  
-                  <div className={`flex flex-wrap gap-4 text-sm text-muted-foreground mb-4 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3" />
-                      {exp.location}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {exp.period}
-                    </span>
-                  </div>
-
-                  <ul className={`space-y-2 ${index % 2 === 0 ? "md:text-right" : ""}`}>
-                    {exp.points.map((point, i) => (
-                      <li key={i} className="text-muted-foreground text-sm flex items-start gap-2">
-                        <span className={`text-primary mono ${index % 2 === 0 ? "md:order-2" : ""}`}>→</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="flex items-center gap-2 mb-2">
+                <Briefcase className="w-4 h-4 text-primary" />
+                <h3 className="text-xl font-semibold">{exp.title}</h3>
               </div>
+              
+              <p className="text-primary font-medium mb-2">{exp.company}</p>
+              
+              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-4">
+                <span className="flex items-center gap-1">
+                  <MapPin className="w-3 h-3" />
+                  {exp.location}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3" />
+                  {exp.period}
+                </span>
+              </div>
+
+              <ul className="space-y-2">
+                {exp.points.map((point, i) => (
+                  <li key={i} className="text-muted-foreground text-sm flex items-start gap-2">
+                    <span className="text-primary mono">→</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
