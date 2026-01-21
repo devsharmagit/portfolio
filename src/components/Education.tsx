@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { GraduationCap, MapPin, Calendar } from "lucide-react";
+import { TerminalCard } from "@/components/ui/TerminalCard";
+import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
+import { Meteors } from "@/components/ui/Meteors";
 
 const education = [
   {
@@ -20,8 +23,14 @@ const education = [
 
 const Education = () => {
   return (
-    <section id="education" className="py-24 md:py-32">
-      <div className="container px-6">
+    <section id="education" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Background effects */}
+      <BackgroundBeams className="opacity-30" />
+      <div className="absolute inset-0 overflow-hidden">
+        <Meteors number={12} />
+      </div>
+
+      <div className="container px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,36 +50,38 @@ const Education = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 relative overflow-hidden"
+              className="relative"
             >
-              {edu.current && (
-                <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs mono">
-                    Current
+              <TerminalCard title={edu.school}>
+                {edu.current && (
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs mono">
+                      Current
+                    </span>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 rounded-xl bg-primary/10">
+                    <GraduationCap className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-white">{edu.degree}</h3>
+                    <p className="text-primary">{edu.school}</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-4 text-sm text-gray-400">
+                  <span className="flex items-center gap-1">
+                    <MapPin className="w-3 h-3" />
+                    {edu.location}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-3 h-3" />
+                    {edu.period}
                   </span>
                 </div>
-              )}
-
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-primary/10">
-                  <GraduationCap className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">{edu.degree}</h3>
-                  <p className="text-primary">{edu.school}</p>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1">
-                  <MapPin className="w-3 h-3" />
-                  {edu.location}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3" />
-                  {edu.period}
-                </span>
-              </div>
+              </TerminalCard>
             </motion.div>
           ))}
         </div>

@@ -64,32 +64,32 @@ const Hero = () => {
           >
             <a
               href="mailto:devsharmasoe@gmail.com"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 group"
+              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
               aria-label="Email"
             >
               <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
               href="tel:9718560039"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 group"
+              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
               aria-label="Phone"
             >
               <Phone className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
-              href="https://linkedin.com/in/devsharma"
+              href="https://www.linkedin.com/in/dev-sharma-88a87624b/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 group"
+              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
               aria-label="LinkedIn"
             >
               <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
-              href="https://github.com/devsharma"
+              href="https://github.com/devsharmagit"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 group"
+              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
               aria-label="GitHub"
             >
               <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
