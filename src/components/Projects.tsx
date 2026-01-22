@@ -43,10 +43,10 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="projects" className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
       {/* Background glow */}
       <div 
-        className="absolute top-1/2 right-0 w-[600px] h-[600px] rounded-full opacity-30"
+        className="absolute top-1/2 right-0 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] rounded-full opacity-30"
         style={{ background: 'var(--gradient-glow)' }}
       />
       
@@ -56,19 +56,19 @@ const Projects = () => {
         <Meteors number={20} />
       </div>
 
-      <div className="container px-6 relative z-10">
+      <div className="container px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-12 md:mb-16"
         >
-          <span className="mono text-primary text-sm mb-4 block">// featured work</span>
-          <h2 className="section-heading">Projects</h2>
+          <span className="mono text-primary text-xs sm:text-sm mb-3 md:mb-4 block">// featured work</span>
+          <h2 className="section-heading text-2xl sm:text-3xl md:text-4xl">Projects</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -81,27 +81,27 @@ const Projects = () => {
               }`}
             >
               <TerminalCard title={project.title}>
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-4 sm:gap-0">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Zap className="w-5 h-5 text-primary" />
+                    <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                      <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-white group-hover:text-primary transition-colors">
+                      <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-primary transition-colors leading-tight">
                         {project.title}
                       </h3>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 self-end sm:self-auto">
                     {project.websiteUrl && (
                       <a
                         href={project.websiteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors"
+                        className="p-1.5 sm:p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors"
                         aria-label="Visit website"
                       >
-                        <ExternalLink className="w-5 h-5 text-gray-400 hover:text-primary transition-colors" />
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-primary transition-colors" />
                       </a>
                     )}
                     {project.githubUrl && (
@@ -109,33 +109,33 @@ const Projects = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors"
+                        className="p-1.5 sm:p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors"
                         aria-label="View on GitHub"
                       >
-                        <Github className="w-5 h-5 text-gray-400 hover:text-primary transition-colors" />
+                        <Github className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-primary transition-colors" />
                       </a>
                     )}
                   </div>
                 </div>
 
-                <p className="text-gray-300 mb-4">{project.description}</p>
+                <p className="text-gray-300 mb-4 text-sm sm:text-base leading-relaxed">{project.description}</p>
 
                 {/* Highlights */}
-                <ul className="grid sm:grid-cols-2 gap-2 mb-6">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
                   {project.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <li key={i} className="flex items-start sm:items-center gap-2 text-xs sm:text-sm">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5 sm:mt-0" />
                       <span className="text-gray-400">{highlight}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* Tech stack */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {project.tech.map((t, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 rounded-full bg-[#3e3e3e] text-xs mono text-gray-300"
+                      className="px-2.5 py-1 rounded-full bg-[#3e3e3e] text-[10px] sm:text-xs mono text-gray-300 border border-transparent hover:border-primary/30 transition-colors"
                     >
                       {t}
                     </span>

@@ -22,23 +22,23 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="experience" className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
       {/* Background effects */}
       <BackgroundBeams className="opacity-40" />
       <div className="absolute inset-0 overflow-hidden">
         <Meteors number={15} />
       </div>
 
-      <div className="container px-6 relative z-10">
+      <div className="container px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-12 md:mb-16"
         >
-          <span className="mono text-primary text-sm mb-4 block">// work history</span>
-          <h2 className="section-heading">Experience</h2>
+          <span className="mono text-primary text-xs sm:text-sm mb-3 md:mb-4 block">// work history</span>
+          <h2 className="section-heading text-2xl sm:text-3xl md:text-4xl">Experience</h2>
         </motion.div>
 
         <div className="max-w-6xl mx-auto">
@@ -52,28 +52,28 @@ const Experience = () => {
             >
               <TerminalCard title={`${exp.company} — ${exp.title}`}>
                 <div className="flex items-center gap-2 mb-2">
-                  <Briefcase className="w-4 h-4 text-primary" />
-                  <h3 className="text-xl font-semibold text-white">{exp.title}</h3>
+                  <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                  <h3 className="text-lg sm:text-xl font-semibold text-white">{exp.title}</h3>
                 </div>
                 
-                <p className="text-primary font-medium mb-2">{exp.company}</p>
+                <p className="text-primary font-medium mb-2 text-sm sm:text-base">{exp.company}</p>
                 
-                <div className="flex flex-wrap gap-4 text-sm text-gray-400 mb-4">
+                <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-gray-400 mb-4">
                   <span className="flex items-center gap-1">
-                    <MapPin className="w-3 h-3" />
-                    {exp.location}
+                    <MapPin className="w-3 h-3 flex-shrink-0" />
+                    <span className="truncate">{exp.location}</span>
                   </span>
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
-                    {exp.period}
+                    <Calendar className="w-3 h-3 flex-shrink-0" />
+                    <span className="whitespace-nowrap">{exp.period}</span>
                   </span>
                 </div>
 
-                <ul className="space-y-2">
+                <ul className="space-y-2 sm:space-y-2.5">
                   {exp.points.map((point, i) => (
-                    <li key={i} className="text-gray-300 text-sm flex items-start gap-2">
-                      <span className="text-primary mono">→</span>
-                      <span>{point}</span>
+                    <li key={i} className="text-gray-300 text-xs sm:text-sm flex items-start gap-2">
+                      <span className="text-primary mono flex-shrink-0 mt-0.5">→</span>
+                      <span className="flex-1">{point}</span>
                     </li>
                   ))}
                 </ul>
