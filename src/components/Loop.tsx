@@ -1,8 +1,7 @@
-import React from 'react'
-
 const Loop = () => {
   return (
-   <section className="relative w-full z-30 my-32 overflow-hidden -rotate-1">
+    <div className='overflow-hidden' >
+   <section className="relative w-full z-30 my-32 overflow-x-clip -rotate-1">
       {/* Background Decorative Element */}
       <div className="absolute inset-0 -z-10 flex items-center justify-center">
         <div className="w-[1000px] h-[400px] bg-orange-500/50 blur-[180px] rounded-full  " />
@@ -10,7 +9,7 @@ const Loop = () => {
 
       {/* Marquee Container */} 
       <div className="relative border-y border-white/10 bg-gradient-to-r from-white/[0.02] via-white/[0.04] to-white/[0.02] backdrop-blur-md py-12 scale-105 shadow-2xl shadow-orange-500/5">
-        <div className="flex overflow-hidden [--gap:4rem] [--duration:30s] [gap:var(--gap)]">
+        <div className="flex overflow-x-hidden [--gap:4rem] [--duration:30s] [gap:var(--gap)]">
           <div className="flex shrink-0 items-center justify-around [gap:var(--gap)] animate-[marquee_30s_linear_infinite]">
             {["User-Friendly", "Performance", "Security", "Scalability", "Reliability", "Innovation", "Design", "Accessibility"].map((text, i) => (
               <div key={i} className="flex items-center gap-4">
@@ -61,6 +60,7 @@ const Loop = () => {
         </div>
       </div> */}
     </section>
+    </div>
   )
 }
 

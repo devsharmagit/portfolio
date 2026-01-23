@@ -1,5 +1,3 @@
-import React from 'react';
-
 const skills = [
   { name: "ReactJS", icon: "/icons/React_dark.svg" },
   { name: "NextJS", icon: "/icons/nextjs_icon_dark.svg" },
