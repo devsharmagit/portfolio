@@ -69,65 +69,7 @@ const Skills = () => {
       </div>
     </section>
 
-    <section className="relative w-full z-30 my-32 overflow-hidden">
-      {/* Background Decorative Element */}
-      <div className="absolute inset-0 -z-10 flex items-center justify-center">
-        <div className="w-[800px] h-[300px] bg-primary/70 blur-[150px] rounded-full rotate-12" />
-      </div>
-
-      {/* Marquee Container */}
-      <div className="relative border-y border-white/5 bg-white/[0.02] backdrop-blur-sm py-10 -rotate-1 md:-rotate-2 scale-105">
-        <div className="flex overflow-hidden [--gap:4rem] [--duration:40s] [gap:var(--gap)]">
-          <div className="flex shrink-0 items-center justify-around [gap:var(--gap)] animate-marquee">
-            {["User-Friendly", "Performance", "Security", "Scalability", "Reliability", "Innovation", "Design", "Accessibility"].map((text, i) => (
-              <div key={i} className="flex items-center gap-4">
-                <span className="text-2xl md:text-4xl font-black tracking-tighter text-white/50 uppercase italic transition-colors hover:text-primary/40 cursor-default">
-                  {text}
-                </span>
-                <div className="w-2 h-2 rounded-full bg-primary/50 shadow-[0_0_10px_rgba(255,115,0,0.5)]" />
-              </div>
-            ))}
-          </div>
-          {/* Duplicate for seamless loop */}
-          <div className="flex shrink-0 items-center justify-around [gap:var(--gap)] animate-marquee" aria-hidden="true">
-            {["User-Friendly", "Performance", "Security", "Scalability", "Reliability", "Innovation", "Design", "Accessibility"].map((text, i) => (
-              <div key={`dup-${i}`} className="flex items-center gap-4">
-                <span className="text-2xl md:text-4xl font-black tracking-tighter text-white/50 uppercase italic transition-colors hover:text-primary/40 cursor-default">
-                  {text}
-                </span>
-                <div className="w-2 h-2 rounded-full bg-primary/50 shadow-[0_0_10px_rgba(255,115,0,0.5)]" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Second Marquee - Opposite Direction for visual complexity */}
-      {/* <div className="relative border-b border-white/5 bg-white/[0.01] backdrop-blur-sm py-6 rotate-1 md:rotate-1 -mt-4 scale-105 overflow-hidden">
-        <div className="flex overflow-hidden [--gap:4rem] [--duration:35s] [gap:var(--gap)] direction-reverse">
-          <div className="flex shrink-0 items-center justify-around [gap:var(--gap)] animate-marquee [animation-direction:reverse]">
-            {["Frontend", "Backend", "Fullstack", "Database", "Cloud", "DevOps", "Mobile", "UI/UX"].map((text, i) => (
-              <div key={i} className="flex items-center gap-4">
-                <span className="text-lg md:text-2xl font-bold tracking-tight text-white/50 uppercase cursor-default">
-                  {text}
-                </span>
-                <span className="text-primary/30">✦</span>
-              </div>
-            ))}
-          </div>
-          <div className="flex shrink-0 items-center justify-around [gap:var(--gap)] animate-marquee [animation-direction:reverse]" aria-hidden="true">
-            {["Frontend", "Backend", "Fullstack", "Database", "Cloud", "DevOps", "Mobile", "UI/UX"].map((text, i) => (
-              <div key={`dup-${i}`} className="flex items-center gap-4">
-                <span className="text-lg md:text-2xl font-bold tracking-tight text-white/50 uppercase cursor-default">
-                  {text}
-                </span>
-                <span className="text-primary/30">✦</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
-    </section>
+  
     </>
   );
 };

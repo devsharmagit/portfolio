@@ -6,15 +6,17 @@ import Education from "@/components/Education";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import { ParticleBackground } from "@/components/ui/ParticleBackground";
+import Loop from "@/components/Loop";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <ParticleBackground />
       <Navigation />
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10 mx-auto">
         <Hero />
         <Experience />
+        <Loop />
         <Projects />
         <Skills />
         <Education />

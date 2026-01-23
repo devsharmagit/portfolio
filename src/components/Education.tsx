@@ -8,14 +8,14 @@ const education = [
   {
     degree: "B.Tech in Computer Science",
     school: "IILM University",
-    location: "Greater Noida, Delhi",
+    location: "Greater Noida, India",
     period: "2024 – 2028",
     current: true,
   },
   {
     degree: "Senior Secondary Education",
     school: "School of Excellence",
-    location: "Rohini, Delhi",
+    location: "Delhi, India",
     period: "Completed 2023",
     current: false,
   },

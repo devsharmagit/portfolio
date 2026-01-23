@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, MapPin, Calendar } from "lucide-react";
+import { Briefcase, MapPin, Calendar, ExternalLink } from "lucide-react";
 import { TerminalCard } from "@/components/ui/TerminalCard";
 import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 import { Meteors } from "@/components/ui/Meteors";
@@ -17,6 +17,7 @@ const experiences = [
       "Improved media selection and onboarding flows, reducing user drop-offs by 50% and increasing user retention by 30%",
       "Onboarded and mentored junior developers on UI/UX best practices and frontend performance optimization",
     ],
+    websiteUrl: "https://growth99.com",
   },
 ];
 
@@ -41,7 +42,7 @@ const Experience = () => {
           <h2 className="section-heading text-2xl sm:text-3xl md:text-4xl">Experience</h2>
         </motion.div>
 
-        <div className="max-w-6xl mx-auto">
+        <div className=" mx-auto">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -51,9 +52,22 @@ const Experience = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <TerminalCard title={`${exp.company} — ${exp.title}`}>
-                <div className="flex items-center gap-2 mb-2">
-                  <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-                  <h3 className="text-lg sm:text-xl font-semibold text-white">{exp.title}</h3>
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-4 sm:gap-0">
+                  <div className="flex items-center gap-2">
+                    <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                    <h3 className="text-lg sm:text-xl font-semibold text-white">{exp.title}</h3>
+                  </div>
+                  {exp.websiteUrl && (
+                    <a
+                      href={exp.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 sm:p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors self-end sm:self-auto"
+                      aria-label="Visit website"
+                    >
+                      <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-primary transition-colors" />
+                    </a>
+                  )}
                 </div>
                 
                 <p className="text-primary font-medium mb-2 text-sm sm:text-base">{exp.company}</p>
