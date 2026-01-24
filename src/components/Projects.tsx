@@ -81,7 +81,7 @@ const Projects = () => {
               }`}
             >
               <TerminalCard title={project.title}>
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-4 sm:gap-0">
+                <div className="flex flex-row  sm:items-start justify-between mb-4 gap-4 sm:gap-0">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
                       <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />

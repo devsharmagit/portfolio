@@ -1,9 +1,9 @@
 const Loop = () => {
   return (
     <div className='overflow-hidden' >
-   <section className="relative w-full z-30 my-32 overflow-x-clip -rotate-1">
+   <section className="relative w-full z-30 my-32 overflow-hidden -rotate-1">
       {/* Background Decorative Element */}
-      <div className="absolute inset-0 -z-10 flex items-center justify-center">
+      <div className="absolute inset-0 -z-10 flex items-center justify-center overflow-hidden">
         <div className="w-[1000px] h-[400px] bg-orange-500/50 blur-[180px] rounded-full  " />
       </div>
 
@@ -13,7 +13,7 @@ const Loop = () => {
           <div className="flex shrink-0 items-center justify-around [gap:var(--gap)] animate-[marquee_30s_linear_infinite]">
             {["User-Friendly", "Performance", "Security", "Scalability", "Reliability", "Innovation", "Design", "Accessibility"].map((text, i) => (
               <div key={i} className="flex items-center gap-4">
-                <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter text-white/60 uppercase italic transition-all duration-300 hover:text-orange-500/60 hover:scale-105 cursor-default">
+                <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter text-white/60 uppercase italic transition-all duration-300 hover:text-white/90 hover:scale-105 cursor-default">
                   {text}
                 </span>
                 <div className="w-2 h-2 rounded-full bg-orange-500/60 shadow-[0_0_15px_rgba(255,115,0,0.6)]  " />
@@ -24,7 +24,7 @@ const Loop = () => {
           <div className="flex shrink-0 items-center justify-around [gap:var(--gap)] animate-[marquee_30s_linear_infinite]" aria-hidden="true">
             {["User-Friendly", "Performance", "Security", "Scalability", "Reliability", "Innovation", "Design", "Accessibility"].map((text, i) => (
               <div key={`dup-${i}`} className="flex items-center gap-4">
-                <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter text-white/60 uppercase italic transition-all duration-300 hover:text-orange-500/60 hover:scale-105 cursor-default">
+                <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tighter text-white/60 uppercase italic transition-all duration-300 hover:text-white/90 hover:scale-105 cursor-default">
                   {text}
                 </span>
                 <div className="w-2 h-2 rounded-full bg-orange-500/60 shadow-[0_0_15px_rgba(255,115,0,0.6)]  " />

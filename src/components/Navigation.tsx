@@ -89,14 +89,14 @@ const Navigation = () => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-semibold hover:text-primary transition-colors"
+                  className="text-xl font-semibold hover:text-primary transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="mailto:devsharmasoe@gmail.com"
-                className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-center"
+                className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-center text-xl"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact

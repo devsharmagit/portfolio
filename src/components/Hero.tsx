@@ -1,7 +1,28 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone, ChevronDown } from "lucide-react";
+import { Github, Linkedin, Mail, ChevronDown, Calendar, Download } from "lucide-react";
+
+// X (Twitter) Logo Component
+const XLogo = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 const Hero = () => {
+  const handleResumeDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/dev_sharma_resume.pdf';
+    link.download = 'Dev_Sharma_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient glow */}
@@ -55,11 +76,37 @@ const Hero = () => {
             <span className="text-lg">NextJs • React • Node.js • TypeScript • PostgreSQL</span>
           </motion.p>
 
-          {/* Social Links */}
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
+          >
+            <a
+              href="https://cal.com/dev-sharma-cal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all duration-300 hover:shadow-warm hover:scale-105"
+            >
+              <Calendar className="w-5 h-5" />
+              <span>Book a Meeting</span>
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
+            </a>
+            <button
+              onClick={handleResumeDownload}
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl glass border border-primary/30 text-foreground font-medium hover:bg-primary/10 hover:border-primary/60 hover:shadow-warm transition-all duration-300 hover:scale-105"
+            >
+              <Download className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <span>Download Resume</span>
+            </button>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
             className="flex items-center justify-center gap-4 mb-12"
           >
             <a
@@ -68,13 +115,6 @@ const Hero = () => {
               aria-label="Email"
             >
               <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="tel:9718560039"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
-              aria-label="Phone"
-            >
-              <Phone className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
               href="https://www.linkedin.com/in/dev-sharma-88a87624b/"
@@ -94,6 +134,15 @@ const Hero = () => {
             >
               <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
+            <a
+              href="https://x.com/devsharmatwt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
+              aria-label="X (formerly Twitter)"
+            >
+              <XLogo className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            </a>
           </motion.div>
 
           
@@ -104,7 +153,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="absolute left-1/2 -translate-x-1/2"
+          className="absolute left-1/2 -translate-x-1/2 "
         >
           <a href="#experience" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
             <span className="text-xs mono">scroll</span>

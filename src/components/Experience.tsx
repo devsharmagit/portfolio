@@ -52,7 +52,7 @@ const Experience = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               <TerminalCard title={`${exp.company} — ${exp.title}`}>
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 gap-4 sm:gap-0">
+                <div className="flex flex-row  sm:items-start justify-between mb-4 gap-4 sm:gap-0">
                   <div className="flex items-center gap-2">
                     <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
                     <h3 className="text-lg sm:text-xl font-semibold text-white">{exp.title}</h3>
