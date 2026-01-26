@@ -32,7 +32,7 @@ const Footer = () => {
               <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
-              href="https://www.linkedin.com/in/dev-sharma-88a87624b/"
+              href="https://www.linkedin.com/in/devsharmaldk/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg hover:bg-secondary transition-colors group"

@@ -117,7 +117,7 @@ const Hero = () => {
               <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
             <a
-              href="https://www.linkedin.com/in/dev-sharma-88a87624b/"
+              href="https://www.linkedin.com/in/devsharmaldk/"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"

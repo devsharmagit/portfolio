@@ -39,6 +39,18 @@ const projects = [
     ],
     githubUrl: "https://github.com/devsharmagit/cms-aiml",
   },
+  {
+    title: "Invincio Services",
+    description: "Military-inspired learning institution landing page featuring modern design and interactive elements for showcasing educational programs.",
+    tech: ["React", "Tailwind CSS", "TypeScript", "Swiperjs"],
+    highlights: [
+      "Interactive carousel with Swiperjs",
+      "Military-themed design aesthetic",
+      "Responsive landing page",
+      "Modern UI/UX implementation",
+    ],
+    websiteUrl: "https://www.invincioservices.com/",
+  },
 ];
 
 const Projects = () => {
