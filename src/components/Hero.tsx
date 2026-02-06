@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown, Calendar, Download } from "lucide-react";
+import VisitorCounter from "./VisitorCounter";
 
 // X (Twitter) Logo Component
 const XLogo = ({ className }: { className?: string }) => (
@@ -72,9 +73,18 @@ const Hero = () => {
             <span className="mono text-primary">{'<'}</span>
             Full Stack Developer
             <span className="mono text-primary">{' />'}</span>
-            <br />
-            <span className="text-lg">NextJs • React • Node.js • TypeScript • PostgreSQL</span>
           </motion.p>
+
+          {/* Visitor Counter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.6 }}
+            className="flex justify-center mb-12"
+          >
+            <VisitorCounter />
+          </motion.div>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
@@ -125,29 +135,25 @@ const Hero = () => {
             >
               <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             </a>
-            <a
-              href="https://github.com/devsharmagit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://x.com/devsharmatwt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
-              aria-label="X (formerly Twitter)"
-            >
-              <XLogo className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-          </motion.div>
-
-          
-        </motion.div>
-
+  <a
+    href="https://github.com/devsharmagit"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
+    aria-label="GitHub"
+  >
+    <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+  </a>
+  <a
+    href="https://x.com/devsharmagit"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
+    aria-label="X (Twitter)"
+  >
+    <XLogo className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+  </a>
+</motion.div>
         {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
