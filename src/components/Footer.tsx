@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail, Heart, Calendar } from "lucide-react";
-import VisitorCounter from "./VisitorCounter";
+// import VisitorCounter from "./VisitorCounter";
 
 // X (Twitter) Logo Component
 const XLogo = ({ className }: { className?: string }) => (
@@ -24,7 +24,7 @@ const Footer = () => {
               <span className="font-semibold">Dev Sharma</span>
               <span className="mono text-primary">{'/>'}</span>
             </div>
-            <VisitorCounter />
+            {/* <VisitorCounter /> */}
           </div>
 
           <div className="flex items-center gap-4">

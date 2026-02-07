@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown, Calendar, Download } from "lucide-react";
-import VisitorCounter from "./VisitorCounter";
+// import VisitorCounter from "./VisitorCounter";
 
 // X (Twitter) Logo Component
 const XLogo = ({ className }: { className?: string }) => (
@@ -82,7 +82,7 @@ const Hero = () => {
             transition={{ delay: 0.45, duration: 0.6 }}
             className="flex justify-center mb-12"
           >
-            <VisitorCounter />
+            {/* <VisitorCounter /> */}
           </motion.div>
           </motion.div>
 
