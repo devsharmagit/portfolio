@@ -5,32 +5,59 @@ const VisitorCounter = () => {
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const NAMESPACE = "dev-sharmas-team-1-2803";
+  const KEY = "portfolio-visitors";
+  const API_BASE = "https://api.counterapi.dev/v1";
+  const VISITOR_KEY = "portfolio_visitor_tracked";
+
   useEffect(() => {
-    const fetchAndIncrementCounter = async () => {
+    const trackVisitor = async () => {
       try {
-        // Using counterapi.dev to increment and get visitor count
-        const response = await fetch(
-          "https://api.counterapi.dev/hit/devsharma-portfolio/visitors"
-        );
-        
-        if (response.ok) {
-          const data = await response.json();
-          setVisitorCount(data.value);
+        setIsLoading(true);
+
+        // Check if this visitor has been counted before
+        const hasVisited = localStorage.getItem(VISITOR_KEY);
+
+        if (!hasVisited) {
+          // New visitor - increment counter
+          const response = await fetch(
+            `${API_BASE}/${NAMESPACE}/${KEY}/up`,
+            {
+              method: "PUT",
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            setVisitorCount(data.count);
+            // Mark this visitor as counted
+            localStorage.setItem(VISITOR_KEY, "true");
+          }
+        } else {
+          // Returning visitor - just get count
+          const response = await fetch(
+            `${API_BASE}/${NAMESPACE}/${KEY}/get`
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            setVisitorCount(data.count);
+          }
         }
       } catch (error) {
-        console.error("Error fetching visitor count:", error);
+        console.error("Error tracking visitor:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchAndIncrementCounter();
+    trackVisitor();
   }, []);
 
   if (isLoading) {
     return (
       <div className="flex items-center gap-2 text-muted-foreground text-sm">
-        <Eye className="w-4 h-4" />
+        <Eye className="w-4 h-4 animate-pulse" />
         <span>Loading...</span>
       </div>
     );
