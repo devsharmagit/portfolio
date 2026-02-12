@@ -1,6 +1,6 @@
-import { ReactNode, useRef, useState } from 'react';
-import { cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { ReactNode, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface TerminalCardProps {
   children: ReactNode;
@@ -19,7 +19,6 @@ export const TerminalCard = ({ children, className, title }: TerminalCardProps) 
 
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
-
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
@@ -33,138 +32,89 @@ export const TerminalCard = ({ children, className, title }: TerminalCardProps) 
     setOpacity(0);
   };
 
-  const handleMouseEnter = () => {
-    setOpacity(1);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
-  };
-
   return (
     <motion.div
       ref={divRef}
       onMouseMove={handleMouseMove}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setOpacity(1)}
+      onMouseLeave={() => setOpacity(0)}
       className={cn(
-        'relative rounded-xl overflow-hidden group',
-        'bg-gradient-to-br from-[#1a1a1a] via-[#1e1e1e] to-[#1a1a1a]',
-        'backdrop-blur-xl',
-        'border border-[#2a2a2a]',
-        'transition-all duration-500 ease-out',
-        'shadow-[0_8px_32px_-8px_hsl(0_0%_0%/0.8)]',
+        "group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#111] via-[#121212] to-[#0d0d0d] shadow-[0_8px_30px_-10px_hsl(0_0%_0%/0.85)] transition-all duration-500 ease-out",
         className
       )}
-      whileHover={{ scale: 1.01 }}
+      whileHover={{ scale: 1.008 }}
       transition={{ duration: 0.2 }}
     >
-      {/* Animated gradient border */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition duration-500 rounded-xl"
+        className="pointer-events-none absolute -inset-px rounded-xl transition duration-500"
         style={{
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,138,76,0.15), transparent 40%)`,
+          opacity,
+          background: `radial-gradient(640px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.12), transparent 45%)`,
         }}
       />
-      
-      {/* Glowing border effect */}
+
       <motion.div
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
-          background: 'linear-gradient(90deg, #ff8a4c, #ff6b35, #ff8a4c)',
-          backgroundSize: '200% 100%',
-          padding: '1px',
-          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
+          background: "linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.12), rgba(255,255,255,0.4))",
+          backgroundSize: "200% 100%",
+          padding: "1px",
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
         }}
-        animate={{
-          backgroundPosition: ['0% 0%', '200% 0%'],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
+        animate={{ backgroundPosition: ["0% 0%", "200% 0%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Spotlight effect */}
       <div
-        className="pointer-events-none absolute opacity-0 group-hover:opacity-100 transition duration-500 rounded-xl"
+        className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition duration-500 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(400px circle at ${position.x}px ${position.y}px, rgba(255,138,76,0.08), transparent 60%)`,
-          inset: 0,
+          background: `radial-gradient(420px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.07), transparent 65%)`,
         }}
       />
 
-      {/* Inner glow */}
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      {/* macOS Terminal Header - Mobile Responsive */}
-      <div className="relative bg-gradient-to-r from-[#2a2a2a] via-[#2d2d2d] to-[#2a2a2a] border-b border-[#3a3a3a] px-3 sm:px-4 py-2 sm:py-2.5 flex items-center gap-2">
-        {/* Traffic light buttons with glow - Smaller on mobile */}
-        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-          <motion.div 
-            className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f56] shadow-[0_0_8px_rgba(255,95,86,0.6)] cursor-pointer"
-            whileHover={{ scale: 1.2, boxShadow: '0 0 12px rgba(255,95,86,0.8)' }}
-            transition={{ duration: 0.2 }}
-          />
-          <motion.div 
-            className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ffbd2e] shadow-[0_0_8px_rgba(255,189,46,0.6)] cursor-pointer"
-            whileHover={{ scale: 1.2, boxShadow: '0 0 12px rgba(255,189,46,0.8)' }}
-            transition={{ duration: 0.2 }}
-          />
-          <motion.div 
-            className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#27c93f] shadow-[0_0_8px_rgba(39,201,63,0.6)] cursor-pointer"
-            whileHover={{ scale: 1.2, boxShadow: '0 0 12px rgba(39,201,63,0.8)' }}
-            transition={{ duration: 0.2 }}
-          />
+      <div className="relative flex items-center gap-2 border-b border-white/10 bg-gradient-to-r from-[#1b1b1b] via-[#202020] to-[#1b1b1b] px-3 py-2.5 sm:px-4">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+          {["#d0d0d0", "#9c9c9c", "#6f6f6f"].map((color, index) => (
+            <motion.div
+              key={color}
+              className="h-2.5 w-2.5 cursor-pointer rounded-full sm:h-3 sm:w-3"
+              style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}55` }}
+              whileHover={{ scale: 1.15, boxShadow: `0 0 12px ${color}88` }}
+              transition={{ duration: 0.2, delay: index * 0.03 }}
+            />
+          ))}
         </div>
-        {/* Terminal title with gradient - Truncate on mobile */}
+
         {title && (
-          <span className="text-[10px] sm:text-xs bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 bg-clip-text text-transparent ml-1 sm:ml-2 font-medium truncate flex-1 min-w-0">
+          <span className="ml-1 flex-1 truncate bg-gradient-to-r from-gray-300 via-gray-100 to-gray-400 bg-clip-text text-[10px] font-medium text-transparent sm:ml-2 sm:text-xs">
             {title}
           </span>
         )}
-        
-        {/* Animated dots - Hidden on very small screens */}
-        <div className="ml-auto flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
-          <motion.div
-            className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-primary/60"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0 }}
-          />
-          <motion.div
-            className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-primary/60"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-          />
-          <motion.div
-            className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-primary/60"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
-          />
+
+        <div className="ml-auto flex shrink-0 items-center gap-1">
+          {[0, 0.3, 0.6].map((delay) => (
+            <motion.div
+              key={delay}
+              className="h-1 w-1 rounded-full bg-white/65"
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity, delay }}
+            />
+          ))}
         </div>
       </div>
-      
-      {/* Terminal content - Responsive padding */}
-      <div className="relative p-4 sm:p-6 bg-gradient-to-br from-[#1e1e1e]/50 via-[#1e1e1e] to-[#1e1e1e]/50">
-        {/* Scan line effect */}
+
+      <div className="relative bg-gradient-to-br from-[#151515]/70 via-[#121212] to-[#0f0f0f]/70 p-4 sm:p-6">
         <motion.div
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100"
           style={{
-            background: 'linear-gradient(to bottom, transparent 0%, rgba(255,138,76,0.03) 50%, transparent 100%)',
+            background: "linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%)",
           }}
-          animate={{
-            y: ['-100%', '200%'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
+          animate={{ y: ["-100%", "200%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         {children}
       </div>

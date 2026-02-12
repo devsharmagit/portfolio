@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -10,102 +9,46 @@ const navLinks = [
 ];
 
 const Navigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "glass py-4" : "py-6"
-        }`}
-      >
-        <div className="container px-6 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <span className="mono text-primary">{'<'}</span>
-            <span className="font-semibold">DS</span>
-            <span className="mono text-primary">{'/>'}</span>
-          </a>
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/85 backdrop-blur">
+      <div className="container flex items-center justify-between px-6 py-4">
+        <a href="#" className="text-sm font-semibold tracking-[0.16em] text-white/80">
+          DEV SHARMA
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-7 md:flex">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className="text-sm text-white/65 hover:text-white">
+              {link.label}
+            </a>
+          ))}
+          <a href="mailto:devsharmasoe@gmail.com" className="text-sm text-white">
+            Contact
+          </a>
+        </nav>
+
+        <button className="md:hidden" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="border-t border-white/10 px-6 py-4 md:hidden">
+          <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors relative group"
-              >
+              <a key={link.href} href={link.href} onClick={() => setOpen(false)} className="text-white/75">
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
-            <a
-              href="mailto:devsharmasoe@gmail.com"
-              className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-            >
+            <a href="mailto:devsharmasoe@gmail.com" className="text-white" onClick={() => setOpen(false)}>
               Contact
             </a>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
         </div>
-      </motion.nav>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-background pt-24 px-6 md:hidden"
-          >
-            <div className="flex flex-col gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-xl font-semibold hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="mailto:devsharmasoe@gmail.com"
-                className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-center text-xl"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+      )}
+    </header>
   );
 };
 
