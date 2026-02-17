@@ -15,8 +15,22 @@ const projects = [
       "Lighthouse API with manual SEO checks",
       "50% efficiency improvement",
     ],
-    featured: true,
+    featured: false,
     websiteUrl: "https://scorecard.growth99.com/",
+  },
+  {
+    title: "LeetGrind",
+    description: "Competitive LeetCode progress tracking platform for teams with automated daily stat sync, immutable snapshots, and leaderboard ranking.",
+    tech: ["Next.js 16", "React 19", "TypeScript", "Prisma 7", "PostgreSQL 16", "Tailwind CSS 4", "NextAuth v5", "Bun", "Vercel"],
+    highlights: [
+      "Automated midnight UTC updates via Vercel Cron",
+      "Smart weighted ranking across problem difficulty and global rank",
+      "Append-only daily stats for full historical tracking",
+      "Google OAuth authentication with NextAuth v5",
+    ],
+    featured: false,
+    websiteUrl: "https://leetgrind.vercel.app",
+    githubUrl: "https://github.com/devsharmagit/leetgrind",
   },
   {
     title: "CollegeMate.in",
