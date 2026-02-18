@@ -33,6 +33,19 @@ const projects = [
     githubUrl: "https://github.com/devsharmagit/leetgrind",
   },
   {
+    title: "Bolt",
+    description: "AI-powered web app builder that converts natural language prompts into full-stack Next.js applications with instant in-browser preview.",
+    tech: ["Next.js 16", "React 19", "TypeScript 5", "Tailwind CSS 4", "Google Gemini", "WebContainer API"],
+    highlights: [
+      "Generates complete project source code from prompts",
+      "Interactive chat workflow for iterative app development",
+      "Live browser runtime and preview using WebContainers",
+      "Built-in session history and configurable rate limiting",
+    ],
+    websiteUrl: "https://bolt-tau-six.vercel.app/chat",
+    githubUrl: "https://github.com/devsharmagit/bolt",
+  },
+  {
     title: "CollegeMate.in",
     description: "One-on-one mentor booking and e-commerce platform with role-based access control and concurrency-safe payments.",
     tech: ["React (TS)", "Node.js (TS)", "Express", "Prisma", "PostgreSQL"],
