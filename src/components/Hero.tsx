@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ChevronDown, Calendar, Download } from "lucide-react";
+import { Github, Linkedin, Mail, ChevronDown, Calendar, FileText } from "lucide-react";
 // import VisitorCounter from "./VisitorCounter";
 
 // X (Twitter) Logo Component
@@ -15,15 +15,6 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 const Hero = () => {
-  const handleResumeDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/dev_sharma_resume.pdf';
-    link.download = 'Dev_Sharma_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient glow */}
@@ -103,13 +94,15 @@ const Hero = () => {
               <span>Book a Meeting</span>
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
             </a>
-            <button
-              onClick={handleResumeDownload}
+            <a
+              href="https://drive.google.com/file/d/1U_hoKFJETjBU6a8Qr-fyhhTBTvGy2itT/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl glass border border-primary/30 text-foreground font-medium hover:bg-primary/10 hover:border-primary/60 hover:shadow-warm transition-all duration-300 hover:scale-105"
             >
-              <Download className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              <span>Download Resume</span>
-            </button>
+              <FileText className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <span>View Resume</span>
+            </a>
           </motion.div>
 
           {/* Social Links */}
