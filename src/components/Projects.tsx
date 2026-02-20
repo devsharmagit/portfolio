@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Zap } from "lucide-react";
 import { TerminalCard } from "@/components/ui/TerminalCard";

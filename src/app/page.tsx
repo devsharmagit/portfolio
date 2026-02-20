@@ -8,7 +8,7 @@ import Navigation from "@/components/Navigation";
 import { ParticleBackground } from "@/components/ui/ParticleBackground";
 import Loop from "@/components/Loop";
 
-const Index = () => {
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-background relative">
       <ParticleBackground />
@@ -24,6 +24,4 @@ const Index = () => {
       </div>
     </div>
   );
-};
-
-export default Index;
+}

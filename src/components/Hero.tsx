@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown, Calendar, FileText } from "lucide-react";
 // import VisitorCounter from "./VisitorCounter";
