@@ -4,12 +4,29 @@ import { ExternalLink, Github, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 
+// Map tech names to icon paths in /public/icons
+const techIcons: Record<string, string> = {
+  "React": "/icons/React_dark.svg",
+  "Next.js": "/icons/nextjs_icon_dark.svg",
+  "TypeScript": "/icons/typescript.svg",
+  "Tailwind CSS": "/icons/tailwindcss.svg",
+  "Node.js": "/icons/nodejs.svg",
+  "Express": "/icons/Express.js_dark.svg",
+  "PostgreSQL": "/icons/postgresql.svg",
+  "Prisma": "/icons/Prisma_dark.svg",
+  "MongoDB": "/icons/MongoDB_dark.svg",
+  "Docker": "/icons/docker.svg",
+  "Vercel": "/icons/Vercel_dark.svg",
+  "Git": "/icons/git.svg",
+  "GitHub": "/icons/GitHub_dark.svg",
+};
+
 const projects = [
   {
     title: "Growth99 Scorecard",
     description:
       "Website analysis platform used internally by 50+ employees. Reduced report generation from minutes to seconds with real-time data visualization.",
-    tech: ["React", "Express", "PostgreSQL", "Firebase", "TypeScript"],
+    tech: ["React", "Express", "PostgreSQL", "TypeScript"],
     websiteUrl: "https://scorecard.growth99.com/",
     video: "/videos/scorecard.mp4",
     featured: true,
@@ -28,7 +45,7 @@ const projects = [
     title: "Bolt",
     description:
       "AI web app builder that generates full-stack projects from prompts and runs live previews in-browser using WebContainer API.",
-    tech: ["Next.js", "Tailwind CSS", "TypeScript", "Gemini AI"],
+    tech: ["Next.js", "Tailwind CSS", "TypeScript"],
     websiteUrl: "https://bolt-tau-six.vercel.app/chat",
     githubUrl: "https://github.com/devsharmagit/bolt",
     video: "/videos/bolt.mp4",
@@ -139,8 +156,16 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className="rounded-md bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-400 border border-white/[0.04]"
+              className="inline-flex items-center gap-1.5 rounded-md bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-400 border border-white/[0.04]"
             >
+              {techIcons[tech] && (
+                <img
+                  src={techIcons[tech]}
+                  alt={tech}
+                  className="h-3 w-3 object-contain"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+              )}
               {tech}
             </span>
           ))}

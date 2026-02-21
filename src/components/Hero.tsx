@@ -50,7 +50,7 @@ export default function Hero() {
             Dev Sharma
           </h1>
           <p className="text-lg sm:text-xl text-zinc-400 max-w-lg leading-relaxed">
-            Full-stack developer crafting minimal, performant web experiences with modern tools.
+            I design & build clean, fast web apps — turning ideas into polished digital products.
           </p>
         </motion.div>
 

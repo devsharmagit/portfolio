@@ -38,13 +38,21 @@ export default function AnimatedBackground() {
         <div className="h-full w-full rounded-full bg-white blur-[100px]" />
       </motion.div>
 
-      {/* Subtle dot pattern */}
-      <div className="pointer-events-none fixed inset-0 -z-10 opacity-[0.025]">
+      {/* Grid pattern */}
+      <div className="pointer-events-none fixed inset-0 -z-10 opacity-[0.035]">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
-          backgroundSize: '32px 32px'
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: '64px 64px'
         }} />
       </div>
+
+      {/* Fade edges so grid doesn't look clipped */}
+      <div className="pointer-events-none fixed inset-0 -z-10" style={{
+        background: 'radial-gradient(ellipse at 50% 50%, transparent 40%, #090909 80%)'
+      }} />
     </>
   );
 }

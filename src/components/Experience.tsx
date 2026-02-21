@@ -9,6 +9,7 @@ const experiences = [
     company: "Growth99.com",
     location: "Utah, USA",
     period: "Jul 2023 — Aug 2024",
+    logo: "https://growth99.com/storage/2024/09/logo-icon.svg",
     points: [
       "Built 250+ landing pages for healthcare clients using HTML, CSS, JavaScript, and Bootstrap.",
       "Created reusable templates that cut delivery effort by ~50%.",
@@ -32,7 +33,7 @@ export default function Experience() {
         >
           <span className="section-label mb-3 block">Experience</span>
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 font-display">
-            Where I've worked
+            Where I&apos;ve worked
           </h2>
         </motion.div>
 
@@ -46,21 +47,32 @@ export default function Experience() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="mono-card-hover p-5 md:p-6"
             >
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-                <div>
-                  <h3 className="text-base font-semibold text-zinc-100 font-display md:text-lg">
-                    {item.title}
-                  </h3>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-sm text-zinc-300">{item.company}</span>
-                    <a
-                      href={item.websiteUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-zinc-500 hover:text-zinc-300 transition-colors"
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                <div className="flex items-start gap-4">
+                  {/* Company Logo */}
+                  <div className="mt-0.5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.06] shrink-0 overflow-hidden">
+                    <img
+                      src={item.logo}
+                      alt={item.company}
+                      className="h-6 w-6 object-contain"
+                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-zinc-100 font-display md:text-lg">
+                      {item.title}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-sm text-zinc-300">{item.company}</span>
+                      <a
+                        href={item.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-500 hover:text-zinc-300 transition-colors"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-zinc-500 font-mono shrink-0">
@@ -70,7 +82,7 @@ export default function Experience() {
                 </div>
               </div>
 
-              <ul className="space-y-2.5">
+              <ul className="space-y-2.5 sm:pl-[60px]">
                 {item.points.map((point, i) => (
                   <li key={i} className="flex gap-3 text-sm text-zinc-400 leading-relaxed">
                     <span className="mt-2 h-1 w-1 rounded-full bg-zinc-600 shrink-0" />

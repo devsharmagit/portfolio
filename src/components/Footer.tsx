@@ -1,7 +1,8 @@
 'use client'
 
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import VisitorCounter from "./VisitorCounter";
 
 const links = [
   { icon: Mail, href: "mailto:devsharmasoe@gmail.com", label: "Email" },
@@ -21,7 +22,7 @@ export default function Footer() {
           className="text-center"
         >
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 font-display mb-3">
-            Let's work together
+            Let&apos;s work together
           </h2>
           <p className="text-sm text-zinc-400 mb-8 max-w-md mx-auto">
             Open to discussing new projects, creative ideas, or opportunities to be part of your vision.
@@ -42,10 +43,11 @@ export default function Footer() {
             ))}
           </div>
 
-        
-          <p className="mt-2 text-xs text-zinc-700">
-            © {new Date().getFullYear()} Dev Sharma
-          </p>
+          <div className="flex items-center justify-center gap-4 text-xs text-zinc-700">
+            <p>© {new Date().getFullYear()} Dev Sharma</p>
+            <span className="text-zinc-800">·</span>
+            <VisitorCounter />
+          </div>
         </motion.div>
       </div>
     </footer>
