@@ -1,194 +1,178 @@
-"use client";
+'use client'
 
+import { ExternalLink, Github, Play } from "lucide-react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Zap } from "lucide-react";
-import { TerminalCard } from "@/components/ui/TerminalCard";
-import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
-import { Meteors } from "@/components/ui/Meteors";
+import { useRef, useState } from "react";
 
 const projects = [
   {
-    title: "Growth99 Scorecard Tool",
-    description: "Large-scale website analysis platform used by 50+ internal employees. Reduced report generation time from 5 minutes to under 10 seconds.",
-    tech: ["React", "Express", "PostgreSQL", "Firebase Auth", "Python", "TypeScript"],
-    highlights: [
-      "Google authentication using Firebase",
-      "Stored historical reports for 1000+ websites",
-      "Lighthouse API with manual SEO checks",
-      "50% efficiency improvement",
-    ],
-    featured: false,
+    title: "Growth99 Scorecard",
+    description:
+      "Website analysis platform used internally by 50+ employees. Reduced report generation from minutes to seconds with real-time data visualization.",
+    tech: ["React", "Express", "PostgreSQL", "Firebase", "TypeScript"],
     websiteUrl: "https://scorecard.growth99.com/",
+    video: "/videos/scorecard.mp4",
+    featured: true,
   },
   {
     title: "LeetGrind",
-    description: "Competitive LeetCode progress tracking platform for teams with automated daily stat sync, immutable snapshots, and leaderboard ranking.",
-    tech: ["Next.js 16", "React 19", "TypeScript", "Prisma 7", "PostgreSQL 16", "Tailwind CSS 4", "NextAuth v5", "Bun", "Vercel"],
-    highlights: [
-      "Automated midnight UTC updates via Vercel Cron",
-      "Smart weighted ranking across problem difficulty and global rank",
-      "Append-only daily stats for full historical tracking",
-      "Google OAuth authentication with NextAuth v5",
-    ],
-    featured: false,
+    description:
+      "Team-based LeetCode progress tracker with daily snapshots, weighted leaderboard logic, and OAuth authentication.",
+    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
     websiteUrl: "https://leetgrind.vercel.app",
     githubUrl: "https://github.com/devsharmagit/leetgrind",
+    video: "/videos/leetrind.mp4",
+    featured: true,
   },
   {
     title: "Bolt",
-    description: "AI-powered web app builder that converts natural language prompts into full-stack Next.js applications with instant in-browser preview.",
-    tech: ["Next.js 16", "React 19", "TypeScript 5", "Tailwind CSS 4", "Google Gemini", "WebContainer API"],
-    highlights: [
-      "Generates complete project source code from prompts",
-      "Interactive chat workflow for iterative app development",
-      "Live browser runtime and preview using WebContainers",
-      "Built-in session history and configurable rate limiting",
-    ],
+    description:
+      "AI web app builder that generates full-stack projects from prompts and runs live previews in-browser using WebContainer API.",
+    tech: ["Next.js", "Tailwind CSS", "TypeScript", "Gemini AI"],
     websiteUrl: "https://bolt-tau-six.vercel.app/chat",
     githubUrl: "https://github.com/devsharmagit/bolt",
+    video: "/videos/bolt.mp4",
+    featured: true,
   },
   {
     title: "CollegeMate.in",
-    description: "One-on-one mentor booking and e-commerce platform with role-based access control and concurrency-safe payments.",
-    tech: ["React (TS)", "Node.js (TS)", "Express", "Prisma", "PostgreSQL"],
-    highlights: [
-      "Razorpay payment integration",
-      "Google Meet & Calendar automation",
-      "Race condition prevention",
-    ],
+    description:
+      "Mentor booking and commerce platform with role-based access and concurrency-safe payment workflows.",
+    tech: ["React", "Node.js", "Express", "Prisma", "PostgreSQL"],
     websiteUrl: "https://collegemate.in",
-  },
-  {
-    title: "CMS for AI/ML Class",
-    description: "Content Management System for distributing AI/ML notes to college students with restricted access to verified accounts.",
-    tech: ["Next.js", "NextAuth", "Prisma", "PostgreSQL", "Cloudinary"],
-    highlights: [
-      "@iilm.edu account verification",
-      "Secure file uploads with Cloudinary",
-    ],
-    githubUrl: "https://github.com/devsharmagit/cms-aiml",
-  },
-  {
-    title: "Invincio Services",
-    description: "Military-inspired learning institution landing page featuring modern design and interactive elements for showcasing educational programs.",
-    tech: ["React", "Tailwind CSS", "TypeScript", "Swiperjs"],
-    highlights: [
-      "Interactive carousel with Swiperjs",
-      "Military-themed design aesthetic",
-      "Responsive landing page",
-      "Modern UI/UX implementation",
-    ],
-    websiteUrl: "https://www.invincioservices.com/",
+    video: "/videos/collegemate.mp4",
+    featured: false,
   },
 ];
 
-const Projects = () => {
-  return (
-    <section id="projects" className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
-      {/* Background glow */}
-      <div 
-        className="absolute top-1/2 right-0 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px] rounded-full opacity-30"
-        style={{ background: 'var(--gradient-glow)' }}
-      />
-      
-      {/* Background effects */}
-      <BackgroundBeams className="opacity-30" />
-      <div className="absolute inset-0 overflow-hidden">
-        <Meteors number={20} />
-      </div>
+function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
-      <div className="container px-4 sm:px-6 relative z-10">
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  };
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Video Preview */}
+      {project.video && (
+        <div className="relative mb-4 overflow-hidden rounded-2xl border border-white/[0.06] bg-zinc-900/50 aspect-video cursor-pointer">
+          <video
+            ref={videoRef}
+            src={project.video}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover transition-all duration-700 group-hover:scale-[1.02]"
+          />
+          
+          {/* Play indicator overlay */}
+          <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-500 ${
+            isHovered ? 'opacity-0' : 'opacity-100'
+          }`}>
+            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+              <Play className="h-5 w-5 text-white ml-0.5" fill="white" />
+            </div>
+          </div>
+
+          {/* Subtle gradient overlay at bottom */}
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="px-1">
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-lg font-semibold text-zinc-100 font-display group-hover:text-white transition-colors">
+            {project.title}
+          </h3>
+          <div className="flex items-center gap-2 shrink-0 ml-3">
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-500 transition-colors hover:text-zinc-200"
+                aria-label="Source code"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+            )}
+            {project.websiteUrl && (
+              <a
+                href={project.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-500 transition-colors hover:text-zinc-200"
+                aria-label="Live demo"
+              >
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            )}
+          </div>
+        </div>
+
+        <p className="text-sm text-zinc-400 leading-relaxed mb-3">{project.description}</p>
+
+        <div className="flex flex-wrap gap-1.5">
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-md bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-400 border border-white/[0.04]"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+export default function Projects() {
+  return (
+    <section id="projects" className="pb-24">
+      <div className="mono-shell">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
         >
-          <span className="mono text-primary text-xs sm:text-sm mb-3 md:mb-4 block">// featured work</span>
-          <h2 className="section-heading text-2xl sm:text-3xl md:text-4xl">Projects</h2>
+          <span className="section-label mb-3 block">Projects</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 font-display">
+            Things I've built
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid gap-10 md:grid-cols-2">
           {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`group ${
-                project.featured ? "md:col-span-2" : ""
-              }`}
-            >
-              <TerminalCard title={project.title}>
-                <div className="flex flex-row  sm:items-start justify-between mb-4 gap-4 sm:gap-0">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
-                      <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-primary transition-colors leading-tight">
-                        {project.title}
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 self-end sm:self-auto">
-                    {project.websiteUrl && (
-                      <a
-                        href={project.websiteUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 sm:p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors"
-                        aria-label="Visit website"
-                      >
-                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-primary transition-colors" />
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-1.5 sm:p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors"
-                        aria-label="View on GitHub"
-                      >
-                        <Github className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-primary transition-colors" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                <p className="text-gray-300 mb-4 text-sm sm:text-base leading-relaxed">{project.description}</p>
-
-                {/* Highlights */}
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
-                  {project.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start sm:items-center gap-2 text-xs sm:text-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5 sm:mt-0" />
-                      <span className="text-gray-400">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {project.tech.map((t, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 rounded-full bg-[#3e3e3e] text-[10px] sm:text-xs mono text-gray-300 border border-transparent hover:border-primary/30 transition-colors"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </TerminalCard>
-            </motion.div>
+            <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Projects;
+}

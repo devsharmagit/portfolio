@@ -1,81 +1,53 @@
-import { Github, Linkedin, Mail, Heart, Calendar } from "lucide-react";
-// import VisitorCounter from "./VisitorCounter";
+'use client'
 
-// X (Twitter) Logo Component
-const XLogo = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    aria-hidden="true"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 
-const Footer = () => {
+const links = [
+  { icon: Mail, href: "mailto:devsharmasoe@gmail.com", label: "Email" },
+  { icon: Github, href: "https://github.com/devsharmagit", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/devsharmaldk/", label: "LinkedIn" },
+];
+
+export default function Footer() {
   return (
-    <footer className="py-12 border-t border-border relative">
-      <div className="container px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="flex items-center gap-2">
-              <span className="mono text-primary">{'<'}</span>
-              <span className="font-semibold">Dev Sharma</span>
-              <span className="mono text-primary">{'/>'}</span>
-            </div>
-            {/* <VisitorCounter /> */}
+    <footer className="border-t border-white/[0.04] py-16">
+      <div className="mono-shell">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 font-display mb-3">
+            Let's work together
+          </h2>
+          <p className="text-sm text-zinc-400 mb-8 max-w-md mx-auto">
+            Open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+          </p>
+
+          <div className="flex items-center justify-center gap-3 mb-12">
+            {links.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("mailto") ? undefined : "_blank"}
+                rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.06] bg-white/[0.02] text-zinc-400 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.06] hover:text-zinc-100 hover:scale-105"
+                aria-label={label}
+              >
+                <Icon className="h-[18px] w-[18px]" />
+              </a>
+            ))}
           </div>
 
-          <div className="flex items-center gap-4">
-            <a
-              href="mailto:devsharmasoe@gmail.com"
-              className="p-2 rounded-lg hover:bg-secondary transition-colors group"
-              aria-label="Email"
-            >
-              <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/devsharmaldk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-secondary transition-colors group"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://github.com/devsharmagit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-secondary transition-colors group"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://x.com/devsharmatwt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-secondary transition-colors group"
-              aria-label="X (formerly Twitter)"
-            >
-              <XLogo className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://cal.com/dev-sharma-cal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-secondary transition-colors group"
-              aria-label="Calendar"
-            >
-              <Calendar className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-          </div>
-        </div>
+        
+          <p className="mt-2 text-xs text-zinc-700">
+            © {new Date().getFullYear()} Dev Sharma
+          </p>
+        </motion.div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

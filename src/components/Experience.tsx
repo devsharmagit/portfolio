@@ -1,105 +1,87 @@
-"use client";
+'use client'
 
 import { motion } from "framer-motion";
-import { Briefcase, MapPin, Calendar, ExternalLink } from "lucide-react";
-import { TerminalCard } from "@/components/ui/TerminalCard";
-import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
-import { Meteors } from "@/components/ui/Meteors";
+import { ExternalLink } from "lucide-react";
 
 const experiences = [
   {
     title: "Frontend Developer",
     company: "Growth99.com",
     location: "Utah, USA",
-    period: "Jul 2023 – Aug 2024",
+    period: "Jul 2023 — Aug 2024",
     points: [
-      "Developed 250+ high-conversion landing pages for healthcare clients using HTML, CSS, JavaScript, and Bootstrap",
-      "Designed reusable page templates that reduced development effort by 50% and eliminated a month-long delivery backlog within one week",
-      "Built KPI dashboards by integrating REST APIs into a Next.js frontend to track page views, button clicks, and engagement metrics for SmileVirtual.com",
-      "Improved media selection and onboarding flows, reducing user drop-offs by 50% and increasing user retention by 30%",
-      "Onboarded and mentored junior developers on UI/UX best practices and frontend performance optimization",
+      "Built 250+ landing pages for healthcare clients using HTML, CSS, JavaScript, and Bootstrap.",
+      "Created reusable templates that cut delivery effort by ~50%.",
+      "Integrated APIs in a Next.js dashboard to track engagement metrics.",
+      "Improved onboarding and media flows, reducing drop-off and increasing retention.",
     ],
     websiteUrl: "https://growth99.com",
   },
 ];
 
-const Experience = () => {
+export default function Experience() {
   return (
-    <section id="experience" className="py-16 md:py-24 lg:py-32 relative overflow-hidden">
-      {/* Background effects */}
-      <BackgroundBeams className="opacity-40" />
-      <div className="absolute inset-0 overflow-hidden">
-        <Meteors number={15} />
-      </div>
-
-      <div className="container px-4 sm:px-6 relative z-10">
+    <section id="experience" className="pb-24">
+      <div className="mono-shell">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
         >
-          <span className="mono text-primary text-xs sm:text-sm mb-3 md:mb-4 block">// work history</span>
-          <h2 className="section-heading text-2xl sm:text-3xl md:text-4xl">Experience</h2>
+          <span className="section-label mb-3 block">Experience</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 font-display">
+            Where I've worked
+          </h2>
         </motion.div>
 
-        <div className=" mx-auto">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
+        <div className="space-y-6">
+          {experiences.map((item, index) => (
+            <motion.article
+              key={item.company}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="mono-card-hover p-5 md:p-6"
             >
-              <TerminalCard title={`${exp.company} — ${exp.title}`}>
-                <div className="flex flex-row  sm:items-start justify-between mb-4 gap-4 sm:gap-0">
-                  <div className="flex items-center gap-2">
-                    <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-                    <h3 className="text-lg sm:text-xl font-semibold text-white">{exp.title}</h3>
-                  </div>
-                  {exp.websiteUrl && (
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="text-base font-semibold text-zinc-100 font-display md:text-lg">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-sm text-zinc-300">{item.company}</span>
                     <a
-                      href={exp.websiteUrl}
+                      href={item.websiteUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-1.5 sm:p-2 rounded-lg hover:bg-[#3e3e3e] transition-colors self-end sm:self-auto"
-                      aria-label="Visit website"
+                      className="text-zinc-500 hover:text-zinc-300 transition-colors"
                     >
-                      <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-primary transition-colors" />
+                      <ExternalLink className="h-3 w-3" />
                     </a>
-                  )}
+                  </div>
                 </div>
-                
-                <p className="text-primary font-medium mb-2 text-sm sm:text-base">{exp.company}</p>
-                
-                <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-gray-400 mb-4">
-                  <span className="flex items-center gap-1">
-                    <MapPin className="w-3 h-3 flex-shrink-0" />
-                    <span className="truncate">{exp.location}</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3 flex-shrink-0" />
-                    <span className="whitespace-nowrap">{exp.period}</span>
-                  </span>
+                <div className="flex items-center gap-2 text-xs text-zinc-500 font-mono shrink-0">
+                  <span>{item.location}</span>
+                  <span className="text-zinc-700">·</span>
+                  <span>{item.period}</span>
                 </div>
+              </div>
 
-                <ul className="space-y-2 sm:space-y-2.5">
-                  {exp.points.map((point, i) => (
-                    <li key={i} className="text-gray-300 text-xs sm:text-sm flex items-start gap-2">
-                      <span className="text-primary mono flex-shrink-0 mt-0.5">→</span>
-                      <span className="flex-1">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </TerminalCard>
-            </motion.div>
+              <ul className="space-y-2.5">
+                {item.points.map((point, i) => (
+                  <li key={i} className="flex gap-3 text-sm text-zinc-400 leading-relaxed">
+                    <span className="mt-2 h-1 w-1 rounded-full bg-zinc-600 shrink-0" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Experience;
+}

@@ -1,3 +1,5 @@
+'use client'
+
 import Hero from "@/components/Hero";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
@@ -5,23 +7,34 @@ import Skills from "@/components/Skills";
 import Education from "@/components/Education";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
-import { ParticleBackground } from "@/components/ui/ParticleBackground";
-import Loop from "@/components/Loop";
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background relative">
-      <ParticleBackground />
+    <div className="relative min-h-screen bg-background">
+      <AnimatedBackground />
+
       <Navigation />
-      <div className="relative z-10 mx-auto">
+      <main className="relative z-10">
         <Hero />
-        <Experience />
-        <Loop />
-        <Projects />
-        <Skills />
-        <Education />
+        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
+        <div className="pt-24">
+          <Experience />
+        </div>
+        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
+        <div className="pt-24">
+          <Projects />
+        </div>
+        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
+        <div className="pt-24">
+          <Skills />
+        </div>
+        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
+        <div className="pt-24">
+          <Education />
+        </div>
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }

@@ -1,169 +1,121 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, ChevronDown, Calendar, FileText } from "lucide-react";
-// import VisitorCounter from "./VisitorCounter";
+import { FaLinkedin, FaGithub, FaArrowRight } from "react-icons/fa6";
+import { Mail, FileText, Calendar } from 'lucide-react';
+import * as React from 'react';
+import { motion } from 'framer-motion';
+import GitHubContributions from "./GitHubContributions";
 
-// X (Twitter) Logo Component
-const XLogo = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-    aria-hidden="true"
-  >
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
+const socials = [
+  { icon: FaGithub, href: "https://github.com/devsharmagit", label: "GitHub" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/devsharmaldk/", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:devsharmasoe@gmail.com", label: "Email" },
+  { icon: FileText, href: "https://drive.google.com/file/d/1U_hoKFJETjBU6a8Qr-fyhhTBTvGy2itT/view?usp=sharing", label: "Resume" },
+  { icon: Calendar, href: "https://cal.com/dev-sharma-cal", label: "Book a Call" },
+];
 
-const Hero = () => {
+export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background gradient glow */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full animate-glow-pulse"
-          style={{ background: 'var(--gradient-glow)' }}
-        />
-      </div>
-
-      <div className="container relative z-10 px-6">
+    <section id="home" className="pb-20 pt-28 md:pt-36">
+      <div className="mono-shell">
+        {/* Avatar + Status */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center"
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-4 mb-8"
         >
-          {/* Terminal-style intro */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="mono text-sm text-muted-foreground">Available for opportunities</span>
-          </motion.div>
+          <div 
+            className="w-16 h-16 rounded-full overflow-hidden bg-cover bg-center ring-2 ring-white/[0.08] transition-all duration-500 hover:ring-white/[0.2] hover:scale-105"
+            role="img"
+            aria-label="Dev Sharma"
+            style={{ backgroundImage: `url("https://github.com/devsharmagit.png")` }}
+          />
+          <div>
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[13px] text-zinc-400">Available for opportunities</span>
+            </div>
+          </div>
+        </motion.div>
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
-          >
-            <span className="text-foreground">Dev</span>
-            <span className="text-gradient"> Sharma</span>
-          </motion.h1>
-
-          {/* Title */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
-          >
-            <span className="mono text-primary">{'<'}</span>
-            Full Stack Developer
-            <span className="mono text-primary">{' />'}</span>
-          </motion.p>
-
-          {/* Visitor Counter */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.6 }}
-            className="flex justify-center mb-12"
-          >
-            {/* <VisitorCounter /> */}
-          </motion.div>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
-          >
-            <a
-              href="https://cal.com/dev-sharma-cal"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all duration-300 hover:shadow-warm hover:scale-105"
-            >
-              <Calendar className="w-5 h-5" />
-              <span>Book a Meeting</span>
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
-            </a>
-            <a
-              href="https://drive.google.com/file/d/1U_hoKFJETjBU6a8Qr-fyhhTBTvGy2itT/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl glass border border-primary/30 text-foreground font-medium hover:bg-primary/10 hover:border-primary/60 hover:shadow-warm transition-all duration-300 hover:scale-105"
-            >
-              <FileText className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              <span>View Resume</span>
-            </a>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex items-center justify-center gap-4 mb-12"
-          >
-            <a
-              href="mailto:devsharmasoe@gmail.com"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
-              aria-label="Email"
-            >
-              <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/devsharmaldk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            </a>
-  <a
-    href="https://github.com/devsharmagit"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
-    aria-label="GitHub"
-  >
-    <Github className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-  </a>
-  <a
-    href="https://x.com/devsharmagit"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="p-3 rounded-xl glass hover:bg-primary/10 hover:border-primary/50 hover:shadow-warm transition-all duration-300 group"
-    aria-label="X (Twitter)"
-  >
-    <XLogo className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-  </a>
-</motion.div>
-        {/* Scroll indicator */}
+        {/* Name & Headline */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="absolute left-1/2 -translate-x-1/2 "
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-6"
         >
-          <a href="#experience" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-            <span className="text-xs mono">scroll</span>
-            <ChevronDown className="w-5 h-5 animate-bounce" />
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-50 leading-[1.1] mb-4 font-display">
+            Dev Sharma
+          </h1>
+          <p className="text-lg sm:text-xl text-zinc-400 max-w-lg leading-relaxed">
+            Full-stack developer crafting minimal, performant web experiences with modern tools.
+          </p>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex items-center gap-2 mb-12"
+        >
+          {socials.map(({ icon: Icon, href, label }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("mailto") ? undefined : "_blank"}
+              rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+              className="group inline-flex items-center justify-center h-10 w-10 rounded-xl border border-white/[0.06] bg-white/[0.02] text-zinc-400 transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.06] hover:text-zinc-100 hover:scale-105"
+              aria-label={label}
+            >
+              <Icon className="h-[18px] w-[18px]" />
+            </a>
+          ))}
+          
+          <a
+            href="#projects"
+            className="ml-2 group inline-flex items-center gap-2 rounded-xl border border-white/[0.1] bg-white/[0.04] px-4 py-2 text-[13px] font-medium text-zinc-300 transition-all duration-300 hover:border-white/[0.2] hover:bg-white/[0.08] hover:text-white"
+          >
+            View Work
+            <FaArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
           </a>
+        </motion.div>
+
+        {/* GitHub Contributions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mono-card overflow-hidden"
+        >
+          <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-3.5">
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1.5">
+                <div className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
+                <div className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
+                <div className="h-2.5 w-2.5 rounded-full bg-zinc-700" />
+              </div>
+              <span className="ml-2 text-xs text-zinc-500 font-mono">contributions</span>
+            </div>
+            <a
+              href="https://github.com/devsharmagit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-zinc-500 transition-colors hover:text-zinc-300"
+            >
+              @devsharmagit
+            </a>
+          </div>
+          <div className="p-4">
+            <GitHubContributions 
+              username="devsharmagit" 
+              compact={false}
+            />
+          </div>
         </motion.div>
       </div>
     </section>
   );
-};
-
-export default Hero;
+}
