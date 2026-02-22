@@ -3,6 +3,7 @@
 import { ExternalLink, Github, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { FaArrowRight } from "react-icons/fa6";
 
 // Map tech names to icon paths in /public/icons
 const techIcons: Record<string, string> = {
@@ -58,6 +59,15 @@ const projects = [
     tech: ["React", "Node.js", "Express", "Prisma", "PostgreSQL"],
     websiteUrl: "https://collegemate.in",
     video: "/videos/collegemate.mp4",
+    featured: false,
+  },
+  {
+    title: "Invincio Services",
+    description:
+      "Landing page for a military teaching school featuring a modern, responsive UI with smooth animations and clean design.",
+    tech: ["React", "TypeScript", "Vercel"],
+    websiteUrl: "https://www.invincioservices.com/",
+    video: "/videos/invincioservices.mp4",
     featured: false,
   },
 ];
@@ -190,7 +200,12 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   );
 }
 
+const INITIAL_COUNT = 4;
+
 export default function Projects() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_COUNT);
+
   return (
     <section id="projects" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
@@ -208,10 +223,27 @@ export default function Projects() {
         </motion.div>
 
         <div className="grid gap-8 sm:gap-10 md:grid-cols-2">
-          {projects.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
+
+        {projects.length > INITIAL_COUNT && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-10 sm:mt-12"
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.06] hover:bg-black/[0.07] dark:hover:bg-white/[0.07] hover:text-zinc-900 dark:hover:text-zinc-200 transition-all duration-300"
+            >
+              {showAll ? "Show Less" : "View More"}
+              <FaArrowRight className={`h-3 w-3 transition-transform duration-300 ${showAll ? "rotate-[-90deg]" : "rotate-90"}`} />
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
