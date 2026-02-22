@@ -39,7 +39,7 @@ const VisitorCounter = () => {
     <div className="inline-flex items-center gap-2 text-xs text-zinc-500 transition-colors hover:text-zinc-400">
       <Eye className="h-3.5 w-3.5" />
       {isLoading ? (
-        <span className="inline-block h-3 w-8 animate-pulse rounded bg-zinc-800" />
+        <span className="inline-block h-3 w-8 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
       ) : (
         <span>
           {visitorCount !== null ? visitorCount.toLocaleString() : "—"} visits

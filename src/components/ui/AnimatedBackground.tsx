@@ -1,8 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export default function AnimatedBackground() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => setMounted(true), []);
+  
+  const isDark = !mounted || resolvedTheme === 'dark';
+  const glowColor = isDark ? 'bg-white' : 'bg-zinc-400';
+  const gridOpacity = isDark ? 0.06 : 0.07;
+  const edgeBg = isDark 
+    ? 'radial-gradient(ellipse at 50% 50%, transparent 50%, hsl(0 0% 3.5%) 85%)'
+    : 'radial-gradient(ellipse at 50% 50%, transparent 50%, hsl(0 0% 98%) 85%)';
+
   return (
     <>
       {/* Soft ambient glow - top left */}
@@ -18,7 +32,7 @@ export default function AnimatedBackground() {
           ease: "easeInOut",
         }}
       >
-        <div className="h-full w-full rounded-full bg-white blur-[120px]" />
+        <div className={`h-full w-full rounded-full ${glowColor} blur-[120px]`} />
       </motion.div>
 
       {/* Soft ambient glow - bottom right */}
@@ -35,15 +49,15 @@ export default function AnimatedBackground() {
           delay: 5,
         }}
       >
-        <div className="h-full w-full rounded-full bg-white blur-[100px]" />
+        <div className={`h-full w-full rounded-full ${glowColor} blur-[100px]`} />
       </motion.div>
 
       {/* Grid pattern */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px)
+            linear-gradient(rgba(${isDark ? '255, 255, 255' : '0, 0, 0'}, ${gridOpacity}) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(${isDark ? '255, 255, 255' : '0, 0, 0'}, ${gridOpacity}) 1px, transparent 1px)
           `,
           backgroundSize: '48px 48px'
         }} />
@@ -51,7 +65,7 @@ export default function AnimatedBackground() {
 
       {/* Fade edges so grid doesn't look clipped */}
       <div className="pointer-events-none fixed inset-0 z-0" style={{
-        background: 'radial-gradient(ellipse at 50% 50%, transparent 50%, #090909 85%)'
+        background: edgeBg
       }} />
     </>
   );

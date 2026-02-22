@@ -17,14 +17,14 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/image.png" type="image/png" />
         <link rel="apple-touch-icon" href="/image.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="bg-[#090909]">
+      <body className="bg-background">
         <Providers>{children}</Providers>
       </body>
     </html>

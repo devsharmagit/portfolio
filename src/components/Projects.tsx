@@ -64,10 +64,10 @@ const projects = [
 
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    setIsPlaying(true);
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.play().catch(() => {});
@@ -75,9 +75,21 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setIsPlaying(false);
     if (videoRef.current) {
       videoRef.current.pause();
+    }
+  };
+
+  const handleTap = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {});
+      setIsPlaying(true);
     }
   };
 
@@ -93,7 +105,10 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     >
       {/* Video Preview */}
       {project.video && (
-        <div className="relative mb-4 overflow-hidden rounded-2xl border border-white/[0.06] bg-zinc-900/50 aspect-video cursor-pointer">
+        <div
+          className="relative mb-3 sm:mb-4 overflow-hidden rounded-xl sm:rounded-2xl border border-black/[0.08] dark:border-white/[0.06] bg-zinc-100 dark:bg-zinc-900/50 aspect-video cursor-pointer"
+          onClick={handleTap}
+        >
           <video
             ref={videoRef}
             src={project.video}
@@ -106,10 +121,10 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           
           {/* Play indicator overlay */}
           <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-500 ${
-            isHovered ? 'opacity-0' : 'opacity-100'
+            isPlaying ? 'opacity-0' : 'opacity-100'
           }`}>
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-              <Play className="h-5 w-5 text-white ml-0.5" fill="white" />
+            <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+              <Play className="h-4 w-4 sm:h-5 sm:w-5 text-white ml-0.5" fill="white" />
             </div>
           </div>
 
@@ -121,7 +136,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       {/* Content */}
       <div className="px-1">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="text-lg font-semibold text-zinc-100 font-display group-hover:text-white transition-colors">
+          <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 font-display group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
             {project.title}
           </h3>
           <div className="flex items-center gap-2 shrink-0 ml-3">
@@ -130,7 +145,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-zinc-200"
+                className="text-zinc-400 dark:text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-200"
                 aria-label="Source code"
               >
                 <Github className="h-4 w-4" />
@@ -141,7 +156,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 href={project.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-zinc-200"
+                className="text-zinc-400 dark:text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-200"
                 aria-label="Live demo"
               >
                 <ExternalLink className="h-4 w-4" />
@@ -150,13 +165,13 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </div>
         </div>
 
-        <p className="text-sm text-zinc-400 leading-relaxed mb-3">{project.description}</p>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-3">{project.description}</p>
 
         <div className="flex flex-wrap gap-1.5">
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className="inline-flex items-center gap-1.5 rounded-md bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-400 border border-white/[0.04]"
+              className="inline-flex items-center gap-1.5 rounded-md bg-black/[0.04] dark:bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 border border-black/[0.06] dark:border-white/[0.04]"
             >
               {techIcons[tech] && (
                 <img
@@ -177,7 +192,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
 export default function Projects() {
   return (
-    <section id="projects" className="pb-24">
+    <section id="projects" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -187,12 +202,12 @@ export default function Projects() {
           className="mb-10"
         >
           <span className="section-label mb-3 block">Projects</span>
-          <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 font-display">
+          <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display">
             Things I've built
           </h2>
         </motion.div>
 
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-2">
           {projects.map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}

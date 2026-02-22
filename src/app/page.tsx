@@ -15,22 +15,22 @@ export default function HomePage() {
       <AnimatedBackground />
 
       <Navigation />
-      <main className="relative z-10">
+      <main className="relative z-10 w-full">
         <Hero />
-        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
-        <div className="pt-24">
+        <div className="mono-shell"><div className="border-t border-black/[0.06] dark:border-white/[0.04]" /></div>
+        <div className="pt-16 sm:pt-20 md:pt-24">
           <Experience />
         </div>
-        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
-        <div className="pt-24">
+        <div className="mono-shell"><div className="border-t border-black/[0.06] dark:border-white/[0.04]" /></div>
+        <div className="pt-16 sm:pt-20 md:pt-24">
           <Projects />
         </div>
-        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
-        <div className="pt-24">
+        <div className="mono-shell"><div className="border-t border-black/[0.06] dark:border-white/[0.04]" /></div>
+        <div className="pt-16 sm:pt-20 md:pt-24">
           <Skills />
         </div>
-        <div className="mono-shell"><div className="border-t border-white/[0.04]" /></div>
-        <div className="pt-24">
+        <div className="mono-shell"><div className="border-t border-black/[0.06] dark:border-white/[0.04]" /></div>
+        <div className="pt-16 sm:pt-20 md:pt-24">
           <Education />
         </div>
         <Footer />

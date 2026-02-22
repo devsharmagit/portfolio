@@ -3,6 +3,7 @@
 import React from 'react';
 import {GitHubCalendar} from 'react-github-calendar';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 interface GitHubContributionsProps {
   username: string;
@@ -16,9 +17,15 @@ const GitHubContributions: React.FC<GitHubContributionsProps> = ({
   className = ""
 }) => {
   const [mounted, setMounted] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
+  const { resolvedTheme } = useTheme();
 
   React.useEffect(() => {
     setMounted(true);
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const theme = {
@@ -28,9 +35,11 @@ const GitHubContributions: React.FC<GitHubContributionsProps> = ({
 
   if (!mounted) {
     return (
-      <div className={`w-full ${compact ? 'h-[120px]' : 'h-[160px]'} rounded-xl bg-zinc-900/50 animate-pulse ${className}`} />
+      <div className={`w-full ${compact ? 'h-[120px]' : 'h-[160px]'} rounded-xl bg-zinc-100 dark:bg-zinc-900/50 animate-pulse ${className}`} />
     );
   }
+
+  const colorScheme = resolvedTheme === 'dark' ? 'dark' : 'light';
 
   return (
     <div className={`relative overflow-hidden rounded-xl ${className}`}>
@@ -40,16 +49,17 @@ const GitHubContributions: React.FC<GitHubContributionsProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="p-2 overflow-x-auto scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent hover:scrollbar-thumb-zinc-600">
-          <div className="min-w-max">
+        <div className="py-1 sm:py-2 overflow-x-auto scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700 scrollbar-track-transparent hover:scrollbar-thumb-zinc-400 dark:hover:scrollbar-thumb-zinc-600 -webkit-overflow-scrolling-touch">
+          <div className="min-w-max flex justify-center">
             <GitHubCalendar
               username={username}
-              colorScheme="dark"
-              fontSize={12}
-              blockSize={10}
-              blockMargin={3}
+              colorScheme={colorScheme}
+              fontSize={isMobile ? 10 : 12}
+              blockSize={isMobile ? 8 : 10}
+              blockMargin={isMobile ? 2 : 3}
               showWeekdayLabels={false}
               theme={theme}
+              showColorLegend={false}
             />
           </div>
         </div>

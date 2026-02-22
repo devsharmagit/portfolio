@@ -48,19 +48,22 @@ const itemVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="pb-24">
+    <section id="skills" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-10 text-center"
+          className="mb-8 sm:mb-10 text-center"
         >
           <span className="section-label mb-3 block">My Skillset</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-display">
+          {/* <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight font-display">
             <span className="text-zinc-100">The Magic </span>
             <span className="text-gradient italic">Behind</span>
+          </h2> */}
+          <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display">
+            The Magic Behind
           </h2>
         </motion.div>
 
@@ -75,7 +78,7 @@ export default function Skills() {
             <motion.li
               key={skill.name}
               variants={itemVariants}
-              className="group relative flex items-center gap-1.5 md:gap-2.5 rounded-xl glass px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-zinc-300 transition-all duration-300 cursor-default hover:bg-white/[0.06] hover:border-white/[0.12] hover:text-white hover:shadow-lg hover:shadow-black/20"
+              className="group relative flex items-center gap-1.5 md:gap-2.5 rounded-xl glass px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-zinc-600 dark:text-zinc-300 transition-all duration-300 cursor-default hover:bg-black/[0.04] dark:hover:bg-white/[0.06] hover:border-black/[0.15] dark:hover:border-white/[0.12] hover:text-zinc-900 dark:hover:text-white hover:shadow-lg hover:shadow-black/[0.05] dark:hover:shadow-black/20"
             >
               <div className="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center shrink-0">
                 <img
