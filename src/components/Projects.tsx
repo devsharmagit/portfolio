@@ -99,14 +99,14 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group"
+      className="group mono-card-hover overflow-hidden flex flex-col"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Video Preview */}
       {project.video && (
         <div
-          className="relative mb-3 sm:mb-4 overflow-hidden rounded-xl sm:rounded-2xl border border-black/[0.08] dark:border-white/[0.06] bg-zinc-100 dark:bg-zinc-900/50 aspect-video cursor-pointer"
+          className="relative overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 aspect-video cursor-pointer border-b border-black/[0.06] dark:border-white/[0.06]"
           onClick={handleTap}
         >
           <video
@@ -120,7 +120,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           />
           
           {/* Play indicator overlay */}
-          <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-500 ${
+          <div className={`absolute inset-0 flex items-center justify-center bg-black/20 dark:bg-black/30 transition-all duration-500 ${
             isPlaying ? 'opacity-0' : 'opacity-100'
           }`}>
             <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
@@ -129,14 +129,14 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </div>
 
           {/* Subtle gradient overlay at bottom */}
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/20 dark:from-black/40 to-transparent pointer-events-none" />
         </div>
       )}
 
       {/* Content */}
-      <div className="px-1">
+      <div className="flex flex-col flex-1 p-4 sm:p-5">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 font-display group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
+          <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 font-display group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
             {project.title}
           </h3>
           <div className="flex items-center gap-2 shrink-0 ml-3">
@@ -165,7 +165,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           </div>
         </div>
 
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-3">{project.description}</p>
+        <p className="text-[13px] sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4 flex-1">{project.description}</p>
 
         <div className="flex flex-wrap gap-1.5">
           {project.tech.map((tech) => (
