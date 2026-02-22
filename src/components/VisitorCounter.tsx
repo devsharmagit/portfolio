@@ -17,6 +17,7 @@ const VisitorCounter = () => {
         const hasVisited = localStorage.getItem(VISITOR_KEY);
 
         if (!hasVisited) {
+          console.log("calling has visited")
           const count = await incrementVisitorCount();
           setVisitorCount(count);
           localStorage.setItem(VISITOR_KEY, "true");

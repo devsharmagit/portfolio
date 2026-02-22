@@ -11,7 +11,7 @@ import AnimatedBackground from "@/components/ui/AnimatedBackground";
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen bg-background">
+    <div className="relative min-h-screen">
       <AnimatedBackground />
 
       <Navigation />

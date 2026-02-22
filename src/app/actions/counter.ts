@@ -1,7 +1,7 @@
 "use server";
 
 const WORKSPACE = "dev-sharmas-team-1-2803";
-const COUNTER_NAME = "visitors";
+const COUNTER_NAME = "first-counter-2803";
 const ACCESS_TOKEN = "ut_FmvrhYUwkJvT295Fv2lijaVMvLzIrUE5tmgXtJZV";
 const BASE_URL = "https://api.counterapi.dev/v2";
 
@@ -16,7 +16,7 @@ export async function incrementVisitorCount(): Promise<number | null> {
     });
     if (!res.ok) return null;
     const data = await res.json();
-    return data.value ?? null;
+    return data.data?.up_count ?? null;
   } catch (err) {
     console.error("Counter increment error:", err);
     return null;
@@ -32,10 +32,9 @@ export async function getVisitorCount(): Promise<number | null> {
       },
       cache: "no-store",
     });
-    console.log(res)
     if (!res.ok) return null;
     const data = await res.json();
-    return data.value ?? null;
+    return data.data?.up_count ?? null;
   } catch (err) {
     console.error("Counter get error:", err);
     return null;
