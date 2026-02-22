@@ -15,7 +15,7 @@ export default function HomePage() {
       <AnimatedBackground />
 
       <Navigation />
-      <main className="relative z-10 w-full">
+      <main className="relative z-10  bg-white/50 dark:bg-zinc-950/50 ">
         <Hero />
         <div className="mono-shell"><div className="border-t border-black/[0.06] dark:border-white/[0.04]" /></div>
         <div className="pt-16 sm:pt-20 md:pt-24">

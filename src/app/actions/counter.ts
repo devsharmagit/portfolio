@@ -1,9 +1,9 @@
 "use server";
 
-const WORKSPACE = "dev-sharmas-team-1-2803";
-const COUNTER_NAME = "first-counter-2803";
-const ACCESS_TOKEN = "ut_FmvrhYUwkJvT295Fv2lijaVMvLzIrUE5tmgXtJZV";
-const BASE_URL = "https://api.counterapi.dev/v2";
+const WORKSPACE = process.env.COUNTER_WORKSPACE!;
+const COUNTER_NAME = process.env.COUNTER_NAME!;
+const ACCESS_TOKEN = process.env.COUNTER_ACCESS_TOKEN!;
+const BASE_URL = process.env.COUNTER_BASE_URL || "https://api.counterapi.dev/v2";
 
 export async function incrementVisitorCount(): Promise<number | null> {
   try {
