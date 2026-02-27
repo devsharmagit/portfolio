@@ -1,188 +1,116 @@
 'use client'
 
-import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
-interface Particle {
+type Particle = {
   x: number;
   y: number;
   vx: number;
   vy: number;
   size: number;
-  opacity: number;
-}
+  alpha: number;
+};
 
 export default function AnimatedBackground() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const themeRef = useRef<string>('dark');
+  const { resolvedTheme } = useTheme();
 
-  useEffect(() => setMounted(true), []);
-
-  const isDark = !mounted || resolvedTheme === 'dark';
-  const glowColor = isDark ? 'bg-white' : 'bg-zinc-400';
-
-  // Keep theme ref in sync for canvas draw loop
-  useEffect(() => {
-    themeRef.current = isDark ? 'dark' : 'light';
-  }, [isDark]);
-
-  // Particle canvas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let rafId = 0;
+    let running = true;
     let particles: Particle[] = [];
-    let mouseX = -9999;
-    let mouseY = -9999;
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const density = 28000;
+      const count = Math.min(70, Math.max(18, Math.floor((w * h) / density)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.16,
+        vy: (Math.random() - 0.5) * 0.16,
+        size: Math.random() * 1.8 + 0.7,
+        alpha: Math.random() * 0.25 + 0.08,
+      }));
     };
 
-    const createParticles = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 18000);
-      particles = [];
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 3.2 + 1.8,
-          opacity: Math.random() * 0.5 + 0.15,
-        });
+    const draw = () => {
+      if (!running) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const dark = resolvedTheme === 'dark';
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -6) p.x = w + 6;
+        if (p.x > w + 6) p.x = -6;
+        if (p.y < -6) p.y = h + 6;
+        if (p.y > h + 6) p.y = -6;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        const a = dark ? p.alpha : p.alpha * 0.7;
+        ctx.fillStyle = dark ? `rgba(255,255,255,${a})` : `rgba(20,20,20,${a})`;
+        ctx.fill();
+      }
+
+      rafId = requestAnimationFrame(draw);
+    };
+
+    const onVisibility = () => {
+      running = !document.hidden;
+      if (running) {
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(draw);
       }
     };
 
-    const drawParticle = (p: Particle) => {
-      const dark = themeRef.current === 'dark';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2);
-      if (dark) {
-        grad.addColorStop(0, `rgba(255, 255, 255, ${p.opacity})`);
-        grad.addColorStop(1, 'transparent');
-      } else {
-        grad.addColorStop(0, `rgba(0, 0, 0, ${p.opacity * 0.65})`);
-        grad.addColorStop(1, 'transparent');
-      }
-      ctx.fillStyle = grad;
-      ctx.fill();
-    };
+    resize();
+    rafId = requestAnimationFrame(draw);
 
-    const updateParticle = (p: Particle) => {
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // Mouse repulsion
-      const dx = mouseX - p.x;
-      const dy = mouseY - p.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 130) {
-        const force = (130 - dist) / 130;
-        p.vx -= (dx / dist) * force * 0.06;
-        p.vy -= (dy / dist) * force * 0.06;
-      }
-
-      // Wrap edges
-      if (p.x < -10) p.x = canvas.width + 10;
-      if (p.x > canvas.width + 10) p.x = -10;
-      if (p.y < -10) p.y = canvas.height + 10;
-      if (p.y > canvas.height + 10) p.y = -10;
-
-      // Damping
-      p.vx *= 0.998;
-      p.vy *= 0.998;
-
-      // Minimum drift
-      const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (speed < 0.1) {
-        p.vx += (Math.random() - 0.5) * 0.05;
-        p.vy += (Math.random() - 0.5) * 0.05;
-      }
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        updateParticle(p);
-        drawParticle(p);
-      });
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-
-    const handleResize = () => {
-      resizeCanvas();
-      createParticles();
-    };
-
-    resizeCanvas();
-    createParticles();
-    animate();
-
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
-  }, []);
+  }, [resolvedTheme]);
 
   return (
     <>
-      {/* Particle canvas */}
       <canvas
         ref={canvasRef}
         className="pointer-events-none fixed inset-0 z-0"
-        style={{ opacity: 0.7 }}
+        aria-hidden="true"
       />
-
-      {/* Soft ambient glow - top left */}
-      <motion.div
-        className="pointer-events-none fixed -left-32 -top-32 z-0 h-[500px] w-[500px] opacity-[0.07]"
-        animate={{
-          scale: [1, 1.08, 1],
-          opacity: [0.07, 0.05, 0.07],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <div className={`h-full w-full rounded-full ${glowColor} blur-[120px]`} />
-      </motion.div>
-
-      {/* Soft ambient glow - bottom right */}
-      <motion.div
-        className="pointer-events-none fixed -bottom-32 -right-32 z-0 h-[400px] w-[400px] opacity-[0.04]"
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.04, 0.06, 0.04],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 5,
-        }}
-      >
-        <div className={`h-full w-full rounded-full ${glowColor} blur-[100px]`} />
-      </motion.div>
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_top_left,rgba(24,24,27,0.08),transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(24,24,27,0.06),transparent_45%)] dark:bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.08),transparent_45%),radial-gradient(ellipse_at_bottom_right,rgba(255,255,255,0.06),transparent_40%)]" />
+      <div className="pointer-events-none fixed -left-40 -top-40 z-0 h-[420px] w-[420px] rounded-full bg-black/[0.04] blur-[110px] dark:bg-white/[0.05]" />
+      <div className="pointer-events-none fixed -bottom-40 -right-40 z-0 h-[360px] w-[360px] rounded-full bg-black/[0.03] blur-[95px] dark:bg-white/[0.04]" />
     </>
   );
 }

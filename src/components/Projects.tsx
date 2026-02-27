@@ -1,11 +1,9 @@
 'use client'
 
 import { ExternalLink, Github, Play } from "lucide-react";
-import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 
-// Map tech names to icon paths in /public/icons
 const techIcons: Record<string, string> = {
   "React": "/icons/React_dark.svg",
   "Next.js": "/icons/nextjs_icon_dark.svg",
@@ -72,7 +70,7 @@ const projects = [
   },
 ];
 
-function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+function ProjectCard({ project }: { project: typeof projects[0] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -80,7 +78,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     setIsPlaying(true);
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
+      void videoRef.current.play();
     }
   };
 
@@ -96,24 +94,19 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     if (isPlaying) {
       videoRef.current.pause();
       setIsPlaying(false);
-    } else {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
+      return;
     }
+    videoRef.current.currentTime = 0;
+    void videoRef.current.play();
+    setIsPlaying(true);
   };
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+    <article
       className="group mono-card-hover overflow-hidden flex flex-col"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Video Preview */}
       {project.video && (
         <div
           className="relative overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 aspect-video cursor-pointer border-b border-black/[0.06] dark:border-white/[0.06]"
@@ -126,11 +119,10 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             loop
             playsInline
             preload="metadata"
-            className="h-full w-full object-cover transition-all duration-700 group-hover:scale-[1.02]"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           />
-          
-          {/* Play indicator overlay */}
-          <div className={`absolute inset-0 flex items-center justify-center bg-black/20 dark:bg-black/30 transition-all duration-500 ${
+
+          <div className={`absolute inset-0 flex items-center justify-center bg-black/20 dark:bg-black/30 transition-opacity duration-200 ${
             isPlaying ? 'opacity-0' : 'opacity-100'
           }`}>
             <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
@@ -138,12 +130,10 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
             </div>
           </div>
 
-          {/* Subtle gradient overlay at bottom */}
           <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/20 dark:from-black/40 to-transparent pointer-events-none" />
         </div>
       )}
 
-      {/* Content */}
       <div className="flex flex-col flex-1 p-4 sm:p-5">
         <div className="flex items-start justify-between mb-2">
           <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 font-display group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
@@ -196,7 +186,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           ))}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -209,32 +199,21 @@ export default function Projects() {
   return (
     <section id="projects" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
+        <div className="mb-10 animate-enter-soft animate-enter-delay-2">
           <span className="section-label mb-3 block">Projects</span>
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display">
-            Things I've built
+            Things I&apos;ve built
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid gap-8 sm:gap-10 md:grid-cols-2">
-          {visibleProjects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+          {visibleProjects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
           ))}
         </div>
 
         {projects.length > INITIAL_COUNT && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex justify-center mt-10 sm:mt-12"
-          >
+          <div className="flex justify-center mt-10 sm:mt-12">
             <button
               onClick={() => setShowAll(!showAll)}
               className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.06] hover:bg-black/[0.07] dark:hover:bg-white/[0.07] hover:text-zinc-900 dark:hover:text-zinc-200 transition-all duration-300"
@@ -242,7 +221,7 @@ export default function Projects() {
               {showAll ? "Show Less" : "View More"}
               <FaArrowRight className={`h-3 w-3 transition-transform duration-300 ${showAll ? "rotate-[-90deg]" : "rotate-90"}`} />
             </button>
-          </motion.div>
+          </div>
         )}
       </div>
     </section>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
@@ -25,14 +24,14 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "py-2 sm:py-3"
             : "py-3 sm:py-5"
         }`}
       >
         <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-0">
-          <div className={`flex items-center justify-between rounded-2xl px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-500 ${
+          <div className={`flex items-center justify-between rounded-2xl px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-300 ${
             isScrolled
               ? "border border-black/[0.08] dark:border-white/[0.06] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-lg shadow-black/[0.05] dark:shadow-black/20"
               : "bg-transparent"
@@ -41,7 +40,6 @@ export default function Navigation() {
               dev sharma
             </a>
 
-            {/* Desktop nav */}
             <div className="hidden items-center gap-1 md:flex">
               {navLinks.map((link) => (
                 <a
@@ -55,7 +53,6 @@ export default function Navigation() {
               <ThemeToggle />
             </div>
 
-            {/* Mobile hamburger */}
             <div className="flex items-center gap-2 md:hidden">
               <ThemeToggle />
               <button
@@ -63,17 +60,20 @@ export default function Navigation() {
                 className="flex flex-col gap-1 p-1"
                 aria-label="Menu"
               >
-                <motion.span
-                  animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-                  className="block h-[1.5px] w-5 bg-zinc-500 dark:bg-zinc-400 origin-center"
+                <span
+                  className={`block h-[1.5px] w-5 bg-zinc-500 dark:bg-zinc-400 origin-center transition-transform duration-200 ${
+                    mobileOpen ? "translate-y-[5px] rotate-45" : ""
+                  }`}
                 />
-                <motion.span
-                  animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-                  className="block h-[1.5px] w-5 bg-zinc-500 dark:bg-zinc-400"
+                <span
+                  className={`block h-[1.5px] w-5 bg-zinc-500 dark:bg-zinc-400 transition-opacity duration-200 ${
+                    mobileOpen ? "opacity-0" : "opacity-100"
+                  }`}
                 />
-                <motion.span
-                  animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-                  className="block h-[1.5px] w-5 bg-zinc-500 dark:bg-zinc-400 origin-center"
+                <span
+                  className={`block h-[1.5px] w-5 bg-zinc-500 dark:bg-zinc-400 origin-center transition-transform duration-200 ${
+                    mobileOpen ? "-translate-y-[5px] -rotate-45" : ""
+                  }`}
                 />
               </button>
             </div>
@@ -81,34 +81,22 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl md:hidden"
-          >
-            <div className="flex h-full flex-col items-center justify-center gap-8">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="text-2xl font-display font-medium text-zinc-800 dark:text-zinc-200 transition-colors hover:text-zinc-950 dark:hover:text-white"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl md:hidden">
+          <div className="flex h-full flex-col items-center justify-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="text-2xl font-display font-medium text-zinc-800 dark:text-zinc-200 transition-colors hover:text-zinc-950 dark:hover:text-white"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 }

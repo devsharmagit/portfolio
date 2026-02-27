@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 
 const education = [
@@ -8,7 +7,7 @@ const education = [
     degree: "B.Tech in Computer Science",
     school: "IILM University",
     location: "Greater Noida, India",
-    period: "2024 — 2028",
+    period: "2024 - 2028",
   },
   {
     degree: "Senior Secondary Education",
@@ -22,27 +21,17 @@ export default function Education() {
   return (
     <section id="education" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
+        <div className="mb-10 animate-enter-soft animate-enter-delay-4">
           <span className="section-label mb-3 block">Education</span>
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display">
             Background
           </h2>
-        </motion.div>
+        </div>
 
         <div className="space-y-4">
-          {education.map((item, index) => (
-            <motion.article
+          {education.map((item) => (
+            <article
               key={item.school}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="mono-card-hover p-4 sm:p-5 md:p-6"
             >
               <div className="flex items-start gap-3 sm:gap-4">
@@ -53,11 +42,11 @@ export default function Education() {
                   <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 font-display">{item.degree}</h3>
                   <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{item.school}</p>
                   <p className="mt-2 text-xs text-zinc-500 font-mono">
-                    {item.location} · {item.period}
+                    {item.location} | {item.period}
                   </p>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

@@ -1,8 +1,7 @@
 'use client'
 
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Calendar, Github, Linkedin, Mail } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
-import { motion } from "framer-motion";
 import VisitorCounter from "./VisitorCounter";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
@@ -11,19 +10,14 @@ const links = [
   { icon: Github, href: "https://github.com/devsharmagit", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/devsharmaldk/", label: "LinkedIn" },
   { icon: FaXTwitter, href: "https://x.com/devsharmatwt", label: "X (Twitter)" },
+  { icon: Calendar, href: "https://cal.com/dev-sharma-cal", label: "Book a Call" },
 ];
 
 export default function Footer() {
   return (
     <footer className="border-t border-black/[0.06] dark:border-white/[0.04] py-10 sm:py-16">
       <div className="mono-shell">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
+        <div className="text-center animate-enter-soft animate-enter-delay-4">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display mb-3">
             Let&apos;s work together
           </h2>
@@ -56,10 +50,10 @@ export default function Footer() {
 
           <div className="flex items-center justify-center gap-4 text-xs text-zinc-400 dark:text-zinc-700">
             <p>© {new Date().getFullYear()} Dev Sharma</p>
-            <span className="text-zinc-300 dark:text-zinc-800">·</span>
+            <span className="text-zinc-300 dark:text-zinc-800">|</span>
             <VisitorCounter />
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
