@@ -17,8 +17,7 @@ export async function incrementVisitorCount(): Promise<number | null> {
     if (!res.ok) return null;
     const data = await res.json();
     return data.data?.up_count ?? null;
-  } catch (err) {
-    console.error("Counter increment error:", err);
+  } catch {
     return null;
   }
 }
@@ -35,8 +34,7 @@ export async function getVisitorCount(): Promise<number | null> {
     if (!res.ok) return null;
     const data = await res.json();
     return data.data?.up_count ?? null;
-  } catch (err) {
-    console.error("Counter get error:", err);
+  } catch {
     return null;
   }
 }

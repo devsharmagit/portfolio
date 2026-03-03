@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import {GitHubCalendar} from 'react-github-calendar';
+import { GitHubCalendar } from 'react-github-calendar';
 import { useTheme } from 'next-themes';
 
 interface GitHubContributionsProps {
@@ -21,10 +21,15 @@ const GitHubContributions: React.FC<GitHubContributionsProps> = ({
 
   React.useEffect(() => {
     setMounted(true);
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const mobileMedia = window.matchMedia('(max-width: 639px)');
+    const updateMobile = (event?: MediaQueryListEvent) => {
+      setIsMobile(event ? event.matches : mobileMedia.matches);
+    };
+
+    updateMobile();
+    mobileMedia.addEventListener('change', updateMobile);
+
+    return () => mobileMedia.removeEventListener('change', updateMobile);
   }, []);
 
   const theme = {

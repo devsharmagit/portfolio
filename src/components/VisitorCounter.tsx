@@ -13,11 +13,9 @@ const VisitorCounter = () => {
   useEffect(() => {
     const trackVisitor = async () => {
       try {
-        setIsLoading(true);
         const hasVisited = localStorage.getItem(VISITOR_KEY);
 
         if (!hasVisited) {
-          console.log("calling has visited")
           const count = await incrementVisitorCount();
           setVisitorCount(count);
           localStorage.setItem(VISITOR_KEY, "true");
@@ -25,8 +23,8 @@ const VisitorCounter = () => {
           const count = await getVisitorCount();
           setVisitorCount(count);
         }
-      } catch (err) {
-        console.error("Counter error:", err);
+      } catch {
+        setVisitorCount(null);
       } finally {
         setIsLoading(false);
       }
@@ -36,10 +34,10 @@ const VisitorCounter = () => {
   }, []);
 
   return (
-    <div className="inline-flex items-center gap-2 text-xs text-zinc-500 transition-colors hover:text-zinc-400">
+    <div className="inline-flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-400">
       <Eye className="h-3.5 w-3.5" />
       {isLoading ? (
-        <span className="inline-block h-3 w-8 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+        <span className="inline-block h-3 w-8 rounded bg-zinc-200 dark:bg-zinc-800" />
       ) : (
         <span>
           {visitorCount !== null ? visitorCount.toLocaleString() : "—"} visits

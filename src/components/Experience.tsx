@@ -1,5 +1,4 @@
-'use client'
-
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
 const experiences = [
@@ -23,7 +22,7 @@ export default function Experience() {
   return (
     <section id="experience" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
-        <div className="mb-10 animate-enter-soft animate-enter-delay-1">
+        <div className="mb-10">
           <span className="section-label mb-3 block">Experience</span>
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display">
             Where I&apos;ve worked
@@ -38,12 +37,14 @@ export default function Experience() {
             >
               <div className="flex flex-col gap-3 mb-3 sm:mb-4">
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="mt-0.5 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.06] shrink-0 overflow-hidden">
-                    <img
+                  <div className="relative mt-0.5 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.06] shrink-0 overflow-hidden">
+                    <Image
                       src={item.logo}
                       alt={item.company}
-                      className="h-6 w-6 object-contain"
-                      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      fill
+                      sizes="44px"
+                      className="object-contain p-2"
+                      unoptimized
                     />
                   </div>
                   <div>
@@ -56,7 +57,7 @@ export default function Experience() {
                         href={item.websiteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors"
+                        className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
                       >
                         <ExternalLink className="h-3 w-3" />
                       </a>

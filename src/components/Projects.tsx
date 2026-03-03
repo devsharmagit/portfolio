@@ -1,7 +1,8 @@
 'use client'
 
+import Image from "next/image";
 import { ExternalLink, Github, Play } from "lucide-react";
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 
 const techIcons: Record<string, string> = {
@@ -70,43 +71,26 @@ const projects = [
   },
 ];
 
-function ProjectCard({ project }: { project: typeof projects[0] }) {
+const ProjectCard = memo(function ProjectCard({ project }: { project: typeof projects[0] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsPlaying(true);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      void videoRef.current.play();
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsPlaying(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-  };
 
   const handleTap = () => {
     if (!videoRef.current) return;
+    const isPlaying = videoRef.current.dataset.playing === "true";
+
     if (isPlaying) {
       videoRef.current.pause();
-      setIsPlaying(false);
+      videoRef.current.dataset.playing = "false";
       return;
     }
+
     videoRef.current.currentTime = 0;
     void videoRef.current.play();
-    setIsPlaying(true);
+    videoRef.current.dataset.playing = "true";
   };
 
   return (
-    <article
-      className="group mono-card-hover overflow-hidden flex flex-col"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <article className="group mono-card-hover overflow-hidden flex flex-col">
       {project.video && (
         <div
           className="relative overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 aspect-video cursor-pointer border-b border-black/[0.06] dark:border-white/[0.06]"
@@ -119,12 +103,17 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
             loop
             playsInline
             preload="metadata"
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="peer h-full w-full object-cover"
+            data-playing="false"
+            onPause={(event) => {
+              event.currentTarget.dataset.playing = "false";
+            }}
+            onPlay={(event) => {
+              event.currentTarget.dataset.playing = "true";
+            }}
           />
 
-          <div className={`absolute inset-0 flex items-center justify-center bg-black/20 dark:bg-black/30 transition-opacity duration-200 ${
-            isPlaying ? 'opacity-0' : 'opacity-100'
-          }`}>
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 dark:bg-black/30 peer-data-[playing=true]:opacity-0">
             <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
               <Play className="h-4 w-4 sm:h-5 sm:w-5 text-white ml-0.5" fill="white" />
             </div>
@@ -136,7 +125,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
 
       <div className="flex flex-col flex-1 p-4 sm:p-5">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 font-display group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
+          <h3 className="text-base sm:text-lg font-semibold text-zinc-900 dark:text-zinc-100 font-display group-hover:text-zinc-950 dark:group-hover:text-white">
             {project.title}
           </h3>
           <div className="flex items-center gap-2 shrink-0 ml-3">
@@ -145,7 +134,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-400 dark:text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-200"
+                className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200"
                 aria-label="Source code"
               >
                 <Github className="h-4 w-4" />
@@ -156,7 +145,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
                 href={project.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-400 dark:text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-200"
+                className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200"
                 aria-label="Live demo"
               >
                 <ExternalLink className="h-4 w-4" />
@@ -174,11 +163,12 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
               className="inline-flex items-center gap-1.5 rounded-md bg-black/[0.04] dark:bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 border border-black/[0.06] dark:border-white/[0.04]"
             >
               {techIcons[tech] && (
-                <img
+                <Image
                   src={techIcons[tech]}
                   alt={tech}
+                  width={12}
+                  height={12}
                   className="h-3 w-3 object-contain"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
               )}
               {tech}
@@ -188,7 +178,7 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
       </div>
     </article>
   );
-}
+});
 
 const INITIAL_COUNT = 4;
 
@@ -199,7 +189,7 @@ export default function Projects() {
   return (
     <section id="projects" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
-        <div className="mb-10 animate-enter-soft animate-enter-delay-2">
+        <div className="mb-10">
           <span className="section-label mb-3 block">Projects</span>
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display">
             Things I&apos;ve built
@@ -215,11 +205,11 @@ export default function Projects() {
         {projects.length > INITIAL_COUNT && (
           <div className="flex justify-center mt-10 sm:mt-12">
             <button
-              onClick={() => setShowAll(!showAll)}
-              className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.06] hover:bg-black/[0.07] dark:hover:bg-white/[0.07] hover:text-zinc-900 dark:hover:text-zinc-200 transition-all duration-300"
+              onClick={() => setShowAll((current) => !current)}
+              className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-black/[0.04] dark:bg-white/[0.04] border border-black/[0.08] dark:border-white/[0.06] hover:bg-black/[0.07] dark:hover:bg-white/[0.07] hover:text-zinc-900 dark:hover:text-zinc-200"
             >
               {showAll ? "Show Less" : "View More"}
-              <FaArrowRight className={`h-3 w-3 transition-transform duration-300 ${showAll ? "rotate-[-90deg]" : "rotate-90"}`} />
+              <FaArrowRight className={`h-3 w-3 ${showAll ? "rotate-[-90deg]" : "rotate-90"}`} />
             </button>
           </div>
         )}

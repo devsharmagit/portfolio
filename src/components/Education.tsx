@@ -1,5 +1,3 @@
-'use client'
-
 import { GraduationCap } from "lucide-react";
 
 const education = [
@@ -21,7 +19,7 @@ export default function Education() {
   return (
     <section id="education" className="pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
-        <div className="mb-10 animate-enter-soft animate-enter-delay-4">
+        <div className="mb-10">
           <span className="section-label mb-3 block">Education</span>
           <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-100 font-display">
             Background
