@@ -20,7 +20,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="pb-16 sm:pb-20 md:pb-24">
+    <section id="experience" className="scroll-mt-20 pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
         <div className="mb-10">
           <span className="section-label mb-3 block">Experience</span>

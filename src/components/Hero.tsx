@@ -17,7 +17,7 @@ const socials = [
 
 export default function Hero() {
   return (
-    <section id="home" className="pb-16 sm:pb-20 pt-24 sm:pt-28 md:pt-36">
+    <section id="home" className="scroll-mt-20 pb-16 sm:pb-20 pt-24 sm:pt-28 md:pt-36">
       <div className="mono-shell">
         <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
           <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-black/[0.08] dark:ring-white/[0.08] hover:ring-black/[0.2] dark:hover:ring-white/[0.2]">

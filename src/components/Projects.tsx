@@ -187,7 +187,7 @@ export default function Projects() {
   const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_COUNT);
 
   return (
-    <section id="projects" className="pb-16 sm:pb-20 md:pb-24">
+    <section id="projects" className="scroll-mt-20 pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
         <div className="mb-10">
           <span className="section-label mb-3 block">Projects</span>

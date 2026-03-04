@@ -39,13 +39,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} scroll-smooth`}
     >
       <head>
         <link rel="icon" href="/image.png" type="image/png" />
         <link rel="apple-touch-icon" href="/image.png" />
       </head>
-      <body className="bg-background">
+      <body className="bg-background ">
         <Providers>{children}</Providers>
       </body>
     </html>

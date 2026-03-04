@@ -17,7 +17,7 @@ const education = [
 
 export default function Education() {
   return (
-    <section id="education" className="pb-16 sm:pb-20 md:pb-24">
+    <section id="education" className="scroll-mt-20 pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
         <div className="mb-10">
           <span className="section-label mb-3 block">Education</span>

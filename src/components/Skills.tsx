@@ -26,7 +26,7 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="pb-16 sm:pb-20 md:pb-24">
+    <section id="skills" className="scroll-mt-20 pb-16 sm:pb-20 md:pb-24">
       <div className="mono-shell">
         <div className="mb-8 sm:mb-10 text-center">
           <span className="section-label mb-3 block">My Skillset</span>
