@@ -48,7 +48,7 @@ const GitHubContributions: React.FC<GitHubContributionsProps> = ({
   return (
     <div className={`relative overflow-hidden rounded-xl ${className}`}>
       <div className="w-full overflow-hidden rounded-xl bg-transparent backdrop-blur-none border-0">
-        <div className="py-1 sm:py-2 overflow-x-auto scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700 scrollbar-track-transparent hover:scrollbar-thumb-zinc-400 dark:hover:scrollbar-thumb-zinc-600 -webkit-overflow-scrolling-touch">
+        <div className="py-1 sm:py-2 overflow-x-auto no-scrollbar">
           <div className="min-w-max flex justify-center">
             <GitHubCalendar
               username={username}
