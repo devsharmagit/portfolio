@@ -1,25 +1,9 @@
 'use client'
 
-import Image from "next/image";
 import { ExternalLink, Github, Play } from "lucide-react";
 import { memo, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
-
-const techIcons: Record<string, string> = {
-  "React": "/icons/React_dark.svg",
-  "Next.js": "/icons/nextjs_icon_dark.svg",
-  "TypeScript": "/icons/typescript.svg",
-  "Tailwind CSS": "/icons/tailwindcss.svg",
-  "Node.js": "/icons/nodejs.svg",
-  "Express": "/icons/Express.js_dark.svg",
-  "PostgreSQL": "/icons/postgresql.svg",
-  "Prisma": "/icons/Prisma_dark.svg",
-  "MongoDB": "/icons/MongoDB_dark.svg",
-  "Docker": "/icons/docker.svg",
-  "Vercel": "/icons/Vercel_dark.svg",
-  "Git": "/icons/git.svg",
-  "GitHub": "/icons/GitHub_dark.svg",
-};
+import { getTechIcon } from "@/lib/techIcons";
 
 const projects = [
   {
@@ -157,23 +141,19 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: typeof pro
         <p className="text-[13px] sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4 flex-1">{project.description}</p>
 
         <div className="flex flex-wrap gap-1.5">
-          {project.tech.map((tech) => (
-            <span
-              key={tech}
-              className="inline-flex items-center gap-1.5 rounded-md bg-black/[0.04] dark:bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 border border-black/[0.06] dark:border-white/[0.04]"
-            >
-              {techIcons[tech] && (
-                <Image
-                  src={techIcons[tech]}
-                  alt={tech}
-                  width={12}
-                  height={12}
-                  className="h-3 w-3 object-contain"
-                />
-              )}
-              {tech}
-            </span>
-          ))}
+          {project.tech.map((tech) => {
+            const icon = getTechIcon(tech);
+
+            return (
+              <span
+                key={tech}
+                className="inline-flex items-center gap-1.5 rounded-md bg-black/[0.04] dark:bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-zinc-500 dark:text-zinc-400 border border-black/[0.06] dark:border-white/[0.04]"
+              >
+                {icon && <span className="h-3 w-3 shrink-0 [&>svg]:h-full [&>svg]:w-full">{icon}</span>}
+                {tech}
+              </span>
+            );
+          })}
         </div>
       </div>
     </article>
