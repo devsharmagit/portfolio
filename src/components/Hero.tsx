@@ -8,7 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 const socials = [
   { icon: FaGithub, href: "https://github.com/devsharmagit", label: "GitHub" },
-  { icon: FaLinkedin, href: "https://www.linkedin.com/in/devsharmaldk/", label: "LinkedIn" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/devsharmalkd/", label: "LinkedIn" },
   { icon: FaXTwitter, href: "https://x.com/devsharmatwt", label: "X (Twitter)" },
   { icon: Mail, href: "mailto:devsharmasoe@gmail.com", label: "Email" },
   { icon: FileText, href: "https://drive.google.com/file/d/1U_hoKFJETjBU6a8Qr-fyhhTBTvGy2itT/view?usp=sharing", label: "Resume" },

@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 const links = [
   { icon: Mail, href: "mailto:devsharmasoe@gmail.com", label: "Email" },
   { icon: Github, href: "https://github.com/devsharmagit", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/devsharmaldk/", label: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/devsharmalkd/", label: "LinkedIn" },
   { icon: FaXTwitter, href: "https://x.com/devsharmatwt", label: "X (Twitter)" },
   { icon: Calendar, href: "https://cal.com/dev-sharma-cal", label: "Book a Call" },
 ];
