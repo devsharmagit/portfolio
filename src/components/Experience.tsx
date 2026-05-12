@@ -3,7 +3,7 @@ import { ExternalLink } from "lucide-react";
 
 const experiences = [
   {
-    title: "Frontend Developer",
+    title: "Full Stack Developer",
     company: "Growth99.com",
     location: "Utah, USA",
     period: "Jul 2023 - Aug 2024",
