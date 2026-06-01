@@ -1,73 +1,108 @@
-# Welcome to your Lovable project
+# Dev Sharma Portfolio
 
-## Project info
+Personal portfolio for **Dev Sharma**, a full-stack developer who designs and builds clean, fast web apps that turn ideas into polished digital products.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+The site is built as a minimal, responsive portfolio with a quiet monochrome interface, dark mode, animated project demos, GitHub contribution activity, work experience, education, and links to my GitHub, LinkedIn, X, resume, email, and booking page.
 
-## How can I edit this code?
+## About Me
 
-There are several ways of editing your application.
+I am currently pursuing a **B.Tech in Computer Science at IILM University** in Greater Noida, India. I care about practical product engineering: building interfaces that feel smooth, backend flows that are reliable, and developer tools that remove friction from day-to-day work.
 
-**Use Lovable**
+I previously worked as a **Full Stack Developer at Growth99.com**, where I:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- Built **250+ landing pages** for healthcare clients with HTML, CSS, JavaScript, and Bootstrap.
+- Created reusable templates that reduced delivery effort by roughly **50%**.
+- Integrated APIs in a Next.js dashboard for engagement tracking.
+- Improved onboarding and media flows to reduce drop-off and improve retention.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Featured Work
 
-**Use your preferred IDE**
+### SecretTunnel
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Zero-knowledge `.env` secret sharing for developers. SecretTunnel encrypts secrets in the browser with AES-256-GCM before anything reaches the server, supports burn-after-read links, configurable TTLs, audit logs, webhook notifications, versioned secrets, authentication, and an npm CLI.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Live: https://secrettunnel.vercel.app/
+- GitHub: https://github.com/devsharmagit/secrettunnel
+- npm: https://www.npmjs.com/package/secrettnl
 
-Follow these steps:
+### Growth99 Scorecard
+
+Website analysis platform used internally by 50+ employees. It reduced report generation from minutes to seconds with real-time data visualization.
+
+- Live: https://scorecard.growth99.com/
+
+### LeetGrind
+
+Team-based LeetCode progress tracker with daily snapshots, weighted leaderboard logic, and OAuth authentication.
+
+- Live: https://leetgrind.vercel.app
+- GitHub: https://github.com/devsharmagit/leetgrind
+
+### Bolt
+
+AI web app builder that generates full-stack projects from prompts and runs live previews in-browser using WebContainer API.
+
+- Live: https://bolt-tau-six.vercel.app/chat
+- GitHub: https://github.com/devsharmagit/bolt
+
+### Other Projects
+
+- **CollegeMate.in**: Mentor booking and commerce platform with role-based access and concurrency-safe payment workflows.
+- **Invincio Services**: Responsive landing page for a military teaching school with smooth animations and clean visual design.
+
+## Tech Stack
+
+This portfolio is built with:
+
+- **Framework**: Next.js, React, TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui-inspired components, next-themes
+- **UI**: lucide-react, react-icons, Radix Tooltip
+- **Data/Integrations**: GitHub contribution calendar, Vercel Analytics
+- **Tooling**: ESLint, Vitest, PostCSS, Turbopack
+
+My broader stack includes React, Next.js, TypeScript, Node.js, Express, PostgreSQL, Prisma, MongoDB, Redis, Supabase, Firebase, Docker, AWS, Vercel, Git, GitHub, Bun, npm, and pnpm.
+
+## Site Features
+
+- Responsive single-page portfolio layout
+- Dark/light theme support
+- GitHub contribution graph
+- Project cards with local MP4 demos
+- Video previews that play on hover and pause when hover ends
+- Project links for live demos, source code, and npm packages
+- Experience, skills, and education sections
+- Accessible icon buttons with tooltips
+
+## Getting Started
+
+Install dependencies:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+npm install
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Run the local development server:
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```sh
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Build for production:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run build
+```
 
-**Use GitHub Codespaces**
+Run tests:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```sh
+npm test
+```
 
-## What technologies are used for this project?
+## Contact
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- GitHub: https://github.com/devsharmagit
+- LinkedIn: https://www.linkedin.com/in/devsharmalkd/
+- X: https://x.com/devsharmatwt
+- Email: devsharmasoe@gmail.com
+- Book a call: https://cal.com/dev-sharma-cal
