@@ -1,11 +1,22 @@
 'use client'
 
-import { ExternalLink, Github, Play } from "lucide-react";
+import { ExternalLink, Github, Package, Play } from "lucide-react";
 import { memo, useRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { getTechIcon } from "@/lib/techIcons";
 
 const projects = [
+  {
+    title: "SecretTunnel",
+    description:
+      "Zero-knowledge .env secret sharing platform with browser-side AES-256-GCM encryption, burn-after-read links, TTLs, audit logs, webhooks, and an npm CLI.",
+    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Redis"],
+    websiteUrl: "https://secrettunnel.vercel.app/",
+    githubUrl: "https://github.com/devsharmagit/secrettunnel",
+    npmUrl: "https://www.npmjs.com/package/secrettnl",
+    video: "/videos/secrettunnel.mp4",
+    featured: true,
+  },
   {
     title: "Growth99 Scorecard",
     description:
@@ -58,6 +69,22 @@ const projects = [
 const ProjectCard = memo(function ProjectCard({ project }: { project: typeof projects[0] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const playVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    void video.play();
+    video.dataset.playing = "true";
+  };
+
+  const pauseVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.pause();
+    video.dataset.playing = "false";
+  };
+
   const handleTap = () => {
     if (!videoRef.current) return;
     const isPlaying = videoRef.current.dataset.playing === "true";
@@ -78,7 +105,12 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: typeof pro
       {project.video && (
         <div
           className="relative overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 aspect-video cursor-pointer border-b border-black/[0.06] dark:border-white/[0.06]"
+          onMouseEnter={playVideo}
+          onMouseLeave={pauseVideo}
+          onFocus={playVideo}
+          onBlur={pauseVideo}
           onClick={handleTap}
+          tabIndex={0}
         >
           <video
             ref={videoRef}
@@ -122,6 +154,17 @@ const ProjectCard = memo(function ProjectCard({ project }: { project: typeof pro
                 aria-label="Source code"
               >
                 <Github className="h-4 w-4" />
+              </a>
+            )}
+            {project.npmUrl && (
+              <a
+                href={project.npmUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200"
+                aria-label="npm package"
+              >
+                <Package className="h-4 w-4" />
               </a>
             )}
             {project.websiteUrl && (
